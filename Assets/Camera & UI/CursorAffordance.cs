@@ -20,10 +20,10 @@ public class CursorAffordance : MonoBehaviour {
     }
 	
 
-	void OnLayerChanged () {
+	void OnLayerChanged (Layer newLayer) {
         print("Cusor over new layer");
 		// Debug.Log(cameraRaycaster.layerHit);
-        switch (cameraRaycaster.currentLayerHit)
+        switch (newLayer)
         {
             case Layer.Walkable:
                 Cursor.SetCursor(walkCursor, cursorHotspot, CursorMode.Auto);
@@ -41,4 +41,6 @@ public class CursorAffordance : MonoBehaviour {
                 return;
         }
 	}
+
+	// TODO consider de-registering OnLayerChanged on leaving all game scenes
 }
