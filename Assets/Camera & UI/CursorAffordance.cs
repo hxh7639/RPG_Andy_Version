@@ -15,11 +15,13 @@ public class CursorAffordance : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cameraRaycaster = FindObjectOfType<CameraRaycaster>();
+        cameraRaycaster.layerChangeObservers += OnLayerChanged;  // registering this method to the group of methods
 
-	}
+    }
 	
-	// Update is called once per frame
-	void LateUpdate () {
+
+	void OnLayerChanged () {
+        print("Cusor over new layer");
 		// Debug.Log(cameraRaycaster.layerHit);
         switch (cameraRaycaster.currentLayerHit)
         {
