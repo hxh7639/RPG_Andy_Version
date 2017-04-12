@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
     CameraRaycaster cameraRaycaster;
-    Vector3 currentClickTarget;
+	Vector3 currentDestination, clickPoint;
 
     bool isInGamePadMode = false;
 
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-        currentClickTarget = transform.position;
+        currentDestination = transform.position;
     }
 
 
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) // G for gamePad. 
             //TODO allow player to map later or add to menu
         {
-			currentClickTarget = transform.position; // reset current position for click target.
+			currentDestination = transform.position; // reset current position for click target.
             isInGamePadMode = !isInGamePadMode; // toggle mode
         }
 
@@ -57,12 +57,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessMouseMovement()
     {
+		clickPoint = cameraRaycaster.hit.point;
         if (Input.GetMouseButton(0))
         {
             switch (cameraRaycaster.currentLayerHit)
             {
                 case Layer.Walkable:
-                    currentClickTarget = cameraRaycaster.hit.point;
+				currentDestination = DestinationStoppingPoint (clickPoint, walkMoveStopRadius);
                     break;
                 case Layer.Enemy:
                     Debug.Log("not moving to enemy");
@@ -73,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
-        var playerToClickPoint = currentClickTarget - transform.position;
+        var playerToClickPoint = currentDestination - transform.position;
         if (playerToClickPoint.magnitude >= walkMoveStopRadius)
         {
             thirdPersonCharacter.Move(playerToClickPoint, false, false); // if you want to hold click to move, put it inside the if(input) statement above. if you want to click once to move, outside of the if(input) statement.
@@ -83,5 +84,21 @@ public class PlayerMovement : MonoBehaviour
             thirdPersonCharacter.Move(Vector3.zero, false, false);
         }
     }
+
+	Vector3 DestinationStoppingPoint(Vector3 destinatiion, float shortening)
+	{
+		Vector3 reductionVector = (destinatiion - transform.position).normalized * shortening;
+		return destinatiion - reductionVector;
+	}
+
+	void OnDrawGizmos()
+	{
+		// Draw movement Gizmos
+		Gizmos.color = Color.black;
+		Gizmos.DrawLine (transform.position, currentDestination);
+		Gizmos.DrawSphere (currentDestination, 0.1f);
+		Gizmos.DrawSphere (clickPoint, 0.1f);
+	}
+
 }
 
