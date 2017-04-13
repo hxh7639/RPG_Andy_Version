@@ -6,8 +6,9 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float walkMoveStopRadius = 0.2f;
-	
-	ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
+    [SerializeField] float stopToAttackRadius = 5f;
+
+    ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
     CameraRaycaster cameraRaycaster;
 	Vector3 currentDestination, clickPoint;
 
@@ -57,16 +58,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void ProcessMouseMovement()
     {
-		clickPoint = cameraRaycaster.hit.point;
         if (Input.GetMouseButton(0))
         {
+            clickPoint = cameraRaycaster.hit.point;
             switch (cameraRaycaster.currentLayerHit)
             {
                 case Layer.Walkable:
-				currentDestination = DestinationStoppingPoint (clickPoint, walkMoveStopRadius);
+                    currentDestination = DestinationStoppingPoint(clickPoint, walkMoveStopRadius);
                     break;
                 case Layer.Enemy:
-                    Debug.Log("not moving to enemy");
+                    currentDestination = DestinationStoppingPoint(clickPoint, stopToAttackRadius);
                     break;
                 default:
                     Debug.Log("Unexpected Layer found, CLICK TO MOVE ERROR");
@@ -74,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
         }
+        WalkToDestination();
+    }
+
+    private void WalkToDestination()
+    {
         var playerToClickPoint = currentDestination - transform.position;
         if (playerToClickPoint.magnitude >= walkMoveStopRadius)
         {
@@ -85,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-	Vector3 DestinationStoppingPoint(Vector3 destinatiion, float shortening)
+    Vector3 DestinationStoppingPoint(Vector3 destinatiion, float shortening)
 	{
 		Vector3 reductionVector = (destinatiion - transform.position).normalized * shortening;
 		return destinatiion - reductionVector;
@@ -95,10 +101,17 @@ public class PlayerMovement : MonoBehaviour
 	{
 		// Draw movement Gizmos
 		Gizmos.color = Color.black;
-		Gizmos.DrawLine (transform.position, currentDestination);
+		Gizmos.DrawLine (transform.position, clickPoint);
 		Gizmos.DrawSphere (currentDestination, 0.1f);
-		Gizmos.DrawSphere (clickPoint, 0.1f);
-	}
+        Gizmos.DrawSphere(clickPoint, 0.15f);
+
+        // Draw attack sphere
+        Gizmos.color = new Color(255f, 0f, 0, .3f);
+        Gizmos.DrawWireSphere(transform.position, stopToAttackRadius);
+        // try out different gizmos
+    }
+
+
 
 }
 
