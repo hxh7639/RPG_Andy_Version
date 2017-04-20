@@ -22,26 +22,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    // Fixed update is called in sync with physics
-    private void FixedUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.G)) // G for gamePad. 
-            //TODO allow player to map later or add to menu
-        {
-			currentDestination = transform.position; // reset current position for click target.
-            isInGamePadMode = !isInGamePadMode; // toggle mode
-        }
-
-        if (isInGamePadMode)
-        {
-            ProcessDirectMent();
-        }
-        else
-        {
-            ProcessMouseMovement();
-        }
-    }
-
     private void ProcessDirectMent()
     {
         // read inputs
@@ -56,27 +36,27 @@ public class PlayerMovement : MonoBehaviour
         thirdPersonCharacter.Move(move, false, false);
     }
 
-    private void ProcessMouseMovement()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            clickPoint = cameraRaycaster.hit.point;
-            switch (cameraRaycaster.currentLayerHit)
-            {
-                case Layer.Walkable:
-                    currentDestination = DestinationStoppingPoint(clickPoint, walkMoveStopRadius);
-                    break;
-                case Layer.Enemy:
-                    currentDestination = DestinationStoppingPoint(clickPoint, stopToAttackRadius);
-                    break;
-                default:
-                    Debug.Log("Unexpected Layer found, CLICK TO MOVE ERROR");
-                    return;
-            }
+    //private void ProcessMouseMovement()
+    //{
+    //    if (Input.GetMouseButton(0))
+    //    {
+    //        clickPoint = cameraRaycaster.hit.point;
+    //        switch (cameraRaycaster.currentLayerHit)
+    //        {
+    //            case Layer.Walkable:
+    //                currentDestination = DestinationStoppingPoint(clickPoint, walkMoveStopRadius);
+    //                break;
+    //            case Layer.Enemy:
+    //                currentDestination = DestinationStoppingPoint(clickPoint, stopToAttackRadius);
+    //                break;
+    //            default:
+    //                Debug.Log("Unexpected Layer found, CLICK TO MOVE ERROR");
+    //                return;
+    //        }
 
-        }
-        WalkToDestination();
-    }
+    //    }
+    //    WalkToDestination();
+    //}
 
     private void WalkToDestination()
     {
