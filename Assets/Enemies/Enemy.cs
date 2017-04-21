@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour {
 
     void Update()
     {
+		// to walk to player (set player as target)
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         if (distanceToPlayer <= attackRadius)
         {

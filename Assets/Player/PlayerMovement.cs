@@ -1,16 +1,18 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
+using UnityEngine.AI;
 
+
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AICharacterControl))]
 [RequireComponent(typeof (ThirdPersonCharacter))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float walkMoveStopRadius = 0.2f;
-    [SerializeField] float stopToAttackRadius = 5f;
-
-    ThirdPersonCharacter thirdPersonCharacter;   // A reference to the ThirdPersonCharacter on the object
-    CameraRaycaster cameraRaycaster;
+	ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
+	CameraRaycaster cameraRaycaster = null;
 	Vector3 currentDestination, clickPoint;
+	AICharacterControl aiCharacterControl = null;
 
     bool isInGamePadMode = false;
 
@@ -19,9 +21,18 @@ public class PlayerMovement : MonoBehaviour
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
         currentDestination = transform.position;
+		aiCharacterControl = GetComponent<AICharacterControl> ();
+
+		cameraRaycaster.notifyMouseClickObservers +=
     }
 
+	void ProcessMouseClick()
+	{
+		
+	}
 
+
+	// TODO make this get called again
     private void ProcessDirectMent()
     {
         // read inputs
@@ -36,46 +47,6 @@ public class PlayerMovement : MonoBehaviour
         thirdPersonCharacter.Move(move, false, false);
     }
 
-    //private void ProcessMouseMovement()
-    //{
-    //    if (Input.GetMouseButton(0))
-    //    {
-    //        clickPoint = cameraRaycaster.hit.point;
-    //        switch (cameraRaycaster.currentLayerHit)
-    //        {
-    //            case Layer.Walkable:
-    //                currentDestination = DestinationStoppingPoint(clickPoint, walkMoveStopRadius);
-    //                break;
-    //            case Layer.Enemy:
-    //                currentDestination = DestinationStoppingPoint(clickPoint, stopToAttackRadius);
-    //                break;
-    //            default:
-    //                Debug.Log("Unexpected Layer found, CLICK TO MOVE ERROR");
-    //                return;
-    //        }
-
-    //    }
-    //    WalkToDestination();
-    //}
-
-    private void WalkToDestination()
-    {
-        var playerToClickPoint = currentDestination - transform.position;
-        if (playerToClickPoint.magnitude >= walkMoveStopRadius)
-        {
-            thirdPersonCharacter.Move(playerToClickPoint, false, false); // if you want to hold click to move, put it inside the if(input) statement above. if you want to click once to move, outside of the if(input) statement.
-        }
-        else
-        {
-            thirdPersonCharacter.Move(Vector3.zero, false, false);
-        }
-    }
-
-    Vector3 DestinationStoppingPoint(Vector3 destinatiion, float shortening)
-	{
-		Vector3 reductionVector = (destinatiion - transform.position).normalized * shortening;
-		return destinatiion - reductionVector;
-	}
 
 	void OnDrawGizmos()
 	{
