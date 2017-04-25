@@ -16,19 +16,19 @@ public class PlayerMovement : MonoBehaviour
 
     bool isInGamePadMode = false;
 
-    private void Start()
+    void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
         currentDestination = transform.position;
 		aiCharacterControl = GetComponent<AICharacterControl> ();
 
-		cameraRaycaster.notifyMouseClickObservers +=
+		cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
     }
 
-	void ProcessMouseClick()
+	void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
 	{
-		
+		print ("Click");
 	}
 
 
@@ -48,19 +48,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-	void OnDrawGizmos()
-	{
-		// Draw movement Gizmos
-		Gizmos.color = Color.black;
-		Gizmos.DrawLine (transform.position, clickPoint);
-		Gizmos.DrawSphere (currentDestination, 0.1f);
-        Gizmos.DrawSphere(clickPoint, 0.15f);
-
-        // Draw attack sphere
-        Gizmos.color = new Color(255f, 0f, 0, .3f);
-        Gizmos.DrawWireSphere(transform.position, stopToAttackRadius);
-        // try out different gizmos
-    }
+//	void OnDrawGizmos()
+//	{
+//		// Draw movement Gizmos
+//		Gizmos.color = Color.black;
+//		Gizmos.DrawLine (transform.position, clickPoint);
+//		Gizmos.DrawSphere (currentDestination, 0.1f);
+//        Gizmos.DrawSphere(clickPoint, 0.15f);
+//
+//        // Draw attack sphere
+//        Gizmos.color = new Color(255f, 0f, 0, .3f);
+//        Gizmos.DrawWireSphere(transform.position, stopToAttackRadius);
+//        // try out different gizmos
+//    }
 
 
 
