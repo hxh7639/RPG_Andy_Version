@@ -5,7 +5,7 @@ using UnityStandardAssets.Characters.ThirdPerson;
 
 
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, IDamageable {
 
     [SerializeField] float maxHealthPoints = 100f;
     [SerializeField] float attackRadius = 100f;
@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour {
 
     float currentHealthPoints = 100f;
     AICharacterControl aiCharacterControl = null;
+
+    public void TakeDamage(float Damage)
+    {
+        currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints);
+    }
 
     public float healthAsPercentage
     {
@@ -41,6 +46,7 @@ public class Enemy : MonoBehaviour {
             aiCharacterControl.SetTarget(transform);
         }
     }
+
 
 
 }
