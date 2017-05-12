@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LogoLoader : MonoBehaviour {
 
@@ -14,6 +15,6 @@ public class LogoLoader : MonoBehaviour {
 	}
 	private IEnumerator countDown(){
 		yield return new WaitForSeconds(9f);
-		Application.LoadLevel(1);
+        SceneManager.LoadScene(1);
 	}
 }
