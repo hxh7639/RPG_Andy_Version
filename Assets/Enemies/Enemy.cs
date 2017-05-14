@@ -12,16 +12,19 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     [SerializeField] float attackRadius = 5f;
     [SerializeField] float damagePerShot = 4f;
+    [SerializeField] float secondsBetweenShots = 0.5f;
+
     [SerializeField] GameObject projectileToUse;
     [SerializeField] GameObject projectileSocket;
-    GameObject player = null;
 
+    bool isAttacking = false;
+    GameObject player = null;
     float currentHealthPoints = 100f;
     AICharacterControl aiCharacterControl = null;
 
     public void TakeDamage(float Damage)
     {
-        currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints);
+        currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints); //TODO switch to coroutines
     }
 
     public float healthAsPercentage
@@ -42,9 +45,15 @@ public class Enemy : MonoBehaviour, IDamageable {
     {
         // to walk to player (set player as target)
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-        if (distanceToPlayer <= attackRadius)
+        if (distanceToPlayer <= attackRadius && !isAttacking)
         {
-            SpawnProjectile(); // TOD slow this down
+            isAttacking = true;
+            InvokeRepeating ("SpawnProjectile", 0f, secondsBetweenShots); // TOD slow this down
+        }
+        if (distanceToPlayer > attackRadius)
+        {
+            isAttacking = false;
+            CancelInvoke();
         }
 
         if (distanceToPlayer <= chaseRadius)
@@ -61,7 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     {
         GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
         Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
-        projectileComponent.damageCaused = damagePerShot; // set damage
+        projectileComponent.SetDamage(damagePerShot); // set damage
 
         Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
         float projectileSpeed = projectileComponent.projectileSpeed;
