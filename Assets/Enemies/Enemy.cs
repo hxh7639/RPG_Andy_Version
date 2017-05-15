@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     [SerializeField] float attackRadius = 5f;
     [SerializeField] float damagePerShot = 4f;
     [SerializeField] float secondsBetweenShots = 0.5f;
-
+    [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
     [SerializeField] GameObject projectileToUse;
     [SerializeField] GameObject projectileSocket;
 
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour, IDamageable {
         Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
         projectileComponent.SetDamage(damagePerShot); // set damage
 
-        Vector3 unitVectorToPlayer = (player.transform.position - projectileSocket.transform.position).normalized;
+        Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
         float projectileSpeed = projectileComponent.projectileSpeed;
         newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
 

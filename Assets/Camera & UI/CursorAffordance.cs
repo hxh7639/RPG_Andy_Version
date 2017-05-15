@@ -26,7 +26,6 @@ public class CursorAffordance : MonoBehaviour {
 	
 
 	void OnLayerChanged (int newLayer) {
-        print("Cusor over new layer");
 		// Debug.Log(cameraRaycaster.layerHit);
         switch (newLayer)
         {
