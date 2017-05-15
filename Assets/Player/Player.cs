@@ -8,9 +8,10 @@ public class Player : MonoBehaviour, IDamageable {
     [SerializeField] float maxHealthPoints = 100;
     [SerializeField] float damagePerHit = 10f;
     [SerializeField] float minTimeBetweenHits = .5f;
+	[SerializeField] float maxAttackRange = 2f;
 
     GameObject currentTarget;
-    float currentHealthPoints = 100f;
+    float currentHealthPoints;
     CameraRaycaster cameraRaycaster;
     float lastHitTime = 0f;
 
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour, IDamageable {
     {
         cameraRaycaster = FindObjectOfType<CameraRaycaster>();
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
-
+		currentHealthPoints = maxHealthPoints;
     }
 
     void OnMouseClick(RaycastHit raycastHit, int layerHit)
@@ -35,7 +36,14 @@ public class Player : MonoBehaviour, IDamageable {
         if (layerHit == enemyLayer)
         {
             var enemy = raycastHit.collider.gameObject;
-            currentTarget = enemy;
+
+			// check if enemy is in range, if not, leave function
+			if ((enemy.transform.position - transform.position).magnitude > maxAttackRange) 
+			{
+				return;
+			}
+			// if it is in range, set enemy as target and damage it
+			currentTarget = enemy;
             var enemyComponent = enemy.GetComponent<Enemy>();
             if (Time.time - lastHitTime > minTimeBetweenHits)
             {

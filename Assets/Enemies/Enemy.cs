@@ -19,12 +19,15 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     bool isAttacking = false;
     GameObject player = null;
-    float currentHealthPoints = 100f;
+    float currentHealthPoints;
     AICharacterControl aiCharacterControl = null;
 
     public void TakeDamage(float Damage)
     {
         currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints); //TODO switch to coroutines
+		if (currentHealthPoints <= 0f) 
+		{ Destroy (gameObject);
+		}
     }
 
     public float healthAsPercentage
@@ -39,6 +42,7 @@ public class Enemy : MonoBehaviour, IDamageable {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         aiCharacterControl = GetComponent<AICharacterControl>();
+		currentHealthPoints = maxHealthPoints;
     }
 
     void Update()
