@@ -13,13 +13,13 @@ public class Projectile : MonoBehaviour {
         damageCaused = damage;
     }
 
-    void OnTriggerEnter(Collider collider)
-	{
-		Component damageableComponent = collider.gameObject.GetComponent(typeof(IDamageable));
+    void OnCollisionEnter(Collision collision)
+    {
+		Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
         if (damageableComponent)
         {
             (damageableComponent as IDamageable).TakeDamage(damageCaused);
         }
-
+        Destroy(gameObject, 0.01f);
     }
 }
