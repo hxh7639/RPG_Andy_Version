@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Player : MonoBehaviour, IDamageable {
 
@@ -9,9 +11,9 @@ public class Player : MonoBehaviour, IDamageable {
     [SerializeField] float damagePerHit = 10f;
     [SerializeField] float minTimeBetweenHits = .5f;
 	[SerializeField] float maxAttackRange = 2f;
-    [SerializeField] Weapon weaponInUse;
-    [SerializeField] GameObject weaponSocket;
 
+    [SerializeField] Weapon weaponInUse;
+  
 
     GameObject currentTarget;
     float currentHealthPoints;
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable {
         cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
     }
 
+    // TODO refactor to reduce number of lines
     void OnMouseClick(RaycastHit raycastHit, int layerHit)
     {
         if (layerHit == enemyLayer)
@@ -70,10 +73,22 @@ public class Player : MonoBehaviour, IDamageable {
     void SpawnWeaponInHand()
     {
         var weaponPrefab = weaponInUse.GetWeaponPrefab();
-        var weapon = Instantiate(weaponPrefab, weaponSocket.transform);
+        GameObject mainHand = RequestMainHand();
+        var weapon = Instantiate(weaponPrefab, mainHand.transform);
         weapon.transform.localPosition = weaponInUse.gripTransform.localPosition;
         weapon.transform.localRotation = weaponInUse.gripTransform.localRotation;
 
     }
 
+    private GameObject RequestMainHand()  // find main hand
+    {
+        var mainHands = GetComponentsInChildren<MainHand>();
+        int numberOfMainHands = mainHands.Length;
+
+        Assert.IsFalse(numberOfMainHands <= 0, "No MainHand found on player, please add one"); // handle 0 hand
+        Assert.IsFalse(numberOfMainHands > 1, "Multiple MainHand Scripts on Player, please remove the extra ones"); //handle 1 hand
+
+        return mainHands[0].gameObject;
+
+    }
 }
