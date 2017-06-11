@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e91bf6fa7b649b458bc977a663acb47, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  WeaponPrefab: {fileID: 0}
+  WeaponPrefab: {fileID: 1802236941448472, guid: 77f48e0529a26cb49841b0fa51fe7941,
+    type: 2}
   attackAnimation: {fileID: 0}
