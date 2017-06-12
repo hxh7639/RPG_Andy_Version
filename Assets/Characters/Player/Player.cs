@@ -14,8 +14,6 @@ public class Player : MonoBehaviour, IDamageable {
 
     [SerializeField] Weapon weaponInUse;
   
-
-    GameObject currentTarget;
     float currentHealthPoints;
     CameraRaycaster cameraRaycaster;
     float lastHitTime = 0f;
@@ -55,7 +53,6 @@ public class Player : MonoBehaviour, IDamageable {
 				return;
 			}
 			// if it is in range, set enemy as target and damage it
-			currentTarget = enemy;
             var enemyComponent = enemy.GetComponent<Enemy>();
             if (Time.time - lastHitTime > minTimeBetweenHits)
             {

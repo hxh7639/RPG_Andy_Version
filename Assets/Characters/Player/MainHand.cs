@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainHand : MonoBehaviour {
+public class MainHand : MonoBehaviour { 
+
 
     // Add to Right hand on character prefab
 
