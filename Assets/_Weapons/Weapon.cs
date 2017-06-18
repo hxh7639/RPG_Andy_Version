@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace RPG.Weapons
 {
     [CreateAssetMenu(menuName = ("RPG/Weapon"))]

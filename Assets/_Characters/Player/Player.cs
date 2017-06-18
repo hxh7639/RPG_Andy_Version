@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-using RPG.CameraUI; // TODO consider re-wiring, don't want Player script to be affected by CameraUI
+// TODO consider re-wiring, don't want Player script to be affected by CameraUI, core,and weapons
+using RPG.CameraUI; 
+using RPG.Core; 
+using RPG.Weapons; 
 
 namespace RPG.Characters
 {
