@@ -34,7 +34,7 @@ namespace RPG.Weapons
         void OnCollisionEnter(Collision collision)
         {
             var layCollidedWith = collision.gameObject.layer;
-            if (layCollidedWith != shooter.layer)
+            if (shooter && layCollidedWith != shooter.layer) //TODO Bug to be fixed later in course
             {
                 DamageDamageable(collision);
             }
