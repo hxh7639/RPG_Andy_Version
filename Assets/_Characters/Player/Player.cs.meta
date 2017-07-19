@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: c60237bdc7b1af84daad5a2ca24abd1a
-timeCreated: 1492186555
+timeCreated: 1500459804
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - weaponInUse: {instanceID: 0}
+  - animatorOverrideController: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
