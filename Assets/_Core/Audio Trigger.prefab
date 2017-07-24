@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4919941756723802}
   - component: {fileID: 114936286987658840}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Audio Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,8 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4100fc711da4ed4c9832fb723ffdc06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: f143be2bc7d7c0a4e85e90951d3eebfa, type: 3}
+  clip: {fileID: 8300000, guid: c043fdd3837a7f740b3f6a0511371eac, type: 3}
+  audioclipvolume: 0.5
   layerFilter: 11
   triggerRadius: 5
-  isOneTimeOnly: 1
+  isOneTimeOnly: 0
   hasPlayed: 0

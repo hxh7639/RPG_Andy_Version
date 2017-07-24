@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1180825831150474}
   m_IsPrefabParent: 1
+--- !u!1 &1055428146528382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4110113356142112}
+  - component: {fileID: 114461512966374974}
+  m_Layer: 0
+  m_Name: Audio Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1089608389700498
 GameObject:
   m_ObjectHideFlags: 1
@@ -393,6 +409,19 @@ Transform:
   m_Father: {fileID: 4445600690264488}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4110113356142112
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055428146528382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4116914026072202}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4116914026072202
 Transform:
   m_ObjectHideFlags: 1
@@ -400,13 +429,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180825831150474}
   m_LocalRotation: {x: -0, y: 0.3159307, z: -0, w: 0.9487823}
-  m_LocalPosition: {x: 45.55, y: 13.001282, z: -112.049515}
+  m_LocalPosition: {x: 71.618225, y: 0, z: -4.948593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4577799207163126}
   - {fileID: 4363747261724658}
   - {fileID: 4468317195356926}
   - {fileID: 4642362384422238}
+  - {fileID: 4110113356142112}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 36.834003, z: 0}
@@ -718,6 +748,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114461512966374974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055428146528382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4100fc711da4ed4c9832fb723ffdc06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: c043fdd3837a7f740b3f6a0511371eac, type: 3}
+  audioclipvolume: 0.85
+  layerFilter: 11
+  triggerRadius: 5
+  isOneTimeOnly: 0
+  hasPlayed: 0
 --- !u!114 &114646216455594528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -788,7 +835,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180825831150474}
-  m_Material: {fileID: 13400000, guid: e52fb17f9b1e7fd48b8955f1391d3688, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3

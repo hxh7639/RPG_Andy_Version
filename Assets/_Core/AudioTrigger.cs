@@ -5,9 +5,11 @@ using UnityEngine;
 public class AudioTrigger : MonoBehaviour
 {
     [SerializeField] AudioClip clip;
+    [SerializeField] float audioclipvolume = .5f;
     [SerializeField] int layerFilter = 0;
     [SerializeField] float triggerRadius = 5f;
     [SerializeField] bool isOneTimeOnly = true;
+
 
     [SerializeField] bool hasPlayed = false;
     AudioSource audioSource;
@@ -39,6 +41,7 @@ public class AudioTrigger : MonoBehaviour
         }
         else if (audioSource.isPlaying == false)
         {
+            audioSource.volume = audioclipvolume;
             audioSource.Play();
             hasPlayed = true;
         }
