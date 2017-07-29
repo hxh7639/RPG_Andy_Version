@@ -1756,7 +1756,7 @@ Prefab:
         type: 2}
       propertyPath: weaponInUse
       value: 
-      objectReference: {fileID: 11400000, guid: ae013a53f90f8cd40925035894b1452d,
+      objectReference: {fileID: 11400000, guid: 0a75f17ac73ff7f4f8c0108260d75895,
         type: 2}
     - target: {fileID: 1877949015733714, guid: 9fc96701a986ba84b9f6f95bde7f1d21, type: 2}
       propertyPath: m_Layer
@@ -4063,6 +4063,7 @@ Transform:
   m_LocalPosition: {x: 23, y: 0, z: -27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1741398124}
   - {fileID: 191580004}
   - {fileID: 785633863}
   - {fileID: 1602734522}
@@ -4102,7 +4103,6 @@ Transform:
   - {fileID: 1585024256}
   - {fileID: 1495558656}
   - {fileID: 912138936}
-  - {fileID: 1741398124}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4700,7 +4700,7 @@ Transform:
   m_LocalScale: {x: 2, y: 0.1, z: 8}
   m_Children: []
   m_Father: {fileID: 1441645029}
-  m_RootOrder: 39
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1741398125
 MeshRenderer:
