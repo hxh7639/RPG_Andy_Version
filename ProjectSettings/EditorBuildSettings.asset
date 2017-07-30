@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Andy's Village.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/Combat Sandbox.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Random Andy Stuff/OSWL_LOGO/OSWL Logo.unity
     guid: 6c464b90dd747044993a76d59c622e25
+  - enabled: 1
+    path: Assets/_Levels/Andy's Village.unity
+    guid: 84fa7e77223b5b64996916f85b7ea496
