@@ -30,8 +30,9 @@ namespace RPG.Characters
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+
             cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;  // add function to do to observe onMouseOverEnemy event (when event happenes, tells observer, and observer does this function)
         }
 
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
@@ -43,22 +44,16 @@ namespace RPG.Characters
             }
         }
 
-            void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        void OnMouseOverEnemy(Enemy enemy) // pass in enemy
         {
-            switch (layerHit)
+            if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
-                case enemyLayerNumber:
-                    // navigate to the enemy
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-
-                default:
-                    Debug.LogWarning("Don't know how to handle mouse click for player movement");
-                    return;
+                // navigate to the enemy
+                aiCharacterControl.SetTarget(enemy.transform);
             }
-
         }
+
+
 
 
         // TODO make this get called again

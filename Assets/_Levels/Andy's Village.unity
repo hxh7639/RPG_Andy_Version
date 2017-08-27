@@ -2879,6 +2879,11 @@ Prefab:
       propertyPath: walkCursor
       value: 
       objectReference: {fileID: 2800000, guid: 50b6dcdb21ff3824a83698c246c6ee17, type: 3}
+    - target: {fileID: 114707075897397868, guid: 0df6408b2503bdb47887524ac6627e71,
+        type: 2}
+      propertyPath: enemyCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: d077caf568dfa984f95b0b5c9c6ce281, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0df6408b2503bdb47887524ac6627e71, type: 2}
   m_IsPrefabParent: 0
