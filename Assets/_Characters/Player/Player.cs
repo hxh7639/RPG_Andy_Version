@@ -13,7 +13,6 @@ namespace RPG.Characters
     public class Player : MonoBehaviour, IDamageable
     {
 
-        [SerializeField] float enemyLayer = 9;
         [SerializeField] float maxHealthPoints = 100;
         [SerializeField] float damagePerHit = 10f;
         [SerializeField] Weapon weaponInUse = null;
@@ -62,30 +61,25 @@ namespace RPG.Characters
         private void RegisterForMouseClick()
         {
             cameraRaycaster = FindObjectOfType<CameraRaycaster>();
-            cameraRaycaster.notifyMouseClickObservers += OnMouseClick;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy; // adding OnMouseOverEnemy to event list for observing onMouseOverEnemy
+
         }
 
-        void OnMouseClick(RaycastHit raycastHit, int layerHit)
+        void OnMouseOverEnemy(Enemy enemy) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
         {
-            if (layerHit == enemyLayer)
+            if (Input.GetMouseButton(0) && IsTargetInRange (enemy.gameObject)) // enemy.gameobject selects the parent gameObject for the enemy script
             {
-                var enemy = raycastHit.collider.gameObject;
-
-                if (IsTargetInRange(enemy))
-                {
                     AttackTarget(enemy);
-                }
-                
             }
         }
 
-        private void AttackTarget(GameObject target)
+
+        private void AttackTarget(Enemy enemy)
         {
-            var enemyComponent = target.GetComponent<Enemy>();
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger("Attack"); // TODO make const
-                enemyComponent.TakeDamage(damagePerHit);
+                enemy.TakeDamage(damagePerHit);
                 lastHitTime = Time.time;
             }
         }

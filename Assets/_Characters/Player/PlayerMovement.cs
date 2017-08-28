@@ -18,11 +18,6 @@ namespace RPG.Characters
         GameObject walkTarget = null;
 
 
-        // TODO solve fight between serialize and const
-        [SerializeField] const int walkableLayerNumber = 8;
-        [SerializeField] const int enemyLayerNumber = 9;
-
-
         void Start()
         {
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();

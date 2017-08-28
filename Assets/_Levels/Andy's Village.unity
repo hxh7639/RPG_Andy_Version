@@ -2884,7 +2884,8 @@ Prefab:
       propertyPath: enemyCursor
       value: 
       objectReference: {fileID: 2800000, guid: d077caf568dfa984f95b0b5c9c6ce281, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114660588170171942, guid: 0df6408b2503bdb47887524ac6627e71, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0df6408b2503bdb47887524ac6627e71, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &683696776 stripped
@@ -6754,7 +6755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60237bdc7b1af84daad5a2ca24abd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer: 9
   maxHealthPoints: 1000
   damagePerHit: 50
   weaponInUse: {fileID: 11400000, guid: 0a75f17ac73ff7f4f8c0108260d75895, type: 2}

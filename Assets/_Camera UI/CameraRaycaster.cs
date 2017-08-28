@@ -6,9 +6,8 @@ using RPG.Characters;  // so we can detect by type (knowing if it is enemy)
 
 namespace RPG.CameraUI
 {
-    public class CameraRaycaster : MonoBehaviour  //TODO rename to cursor
+    public class CameraRaycaster : MonoBehaviour
     {
-        [SerializeField] int[] layerPriorities = null;  // TODO remove
         [SerializeField] Texture2D walkCursor = null;
         [SerializeField] Texture2D enemyCursor = null;
         [SerializeField] Vector2 cursorHotspot = new Vector2(0, 0);
@@ -24,19 +23,8 @@ namespace RPG.CameraUI
 
         public delegate void OnMouseOverTerrian(Vector3 destination);
         public event OnMouseOverTerrian onMouseOverPotentiallyWalkable;
-
-        //TODO remove old delegates below
-        // Setup delegates for broadcasting layer changes to other classes
-        public delegate void OnCursorLayerChange(int newLayer); // declare new delegate type
-        public event OnCursorLayerChange notifyLayerChangeObservers; // instantiate an observer set
-
-        public delegate void OnClickPriorityLayer(RaycastHit raycastHit, int layerHit); // declare new delegate type
-        public event OnClickPriorityLayer notifyMouseClickObservers; // instantiate an observer set
-
-        // for right click
-        public delegate void OnRightClick(RaycastHit raycastHit, int layerHit); // declare new delegate type
-        public event OnRightClick notifyRightClickObservers; // instantiate an observer set
-
+        
+ 
 
         void Update()
         {
@@ -54,7 +42,7 @@ namespace RPG.CameraUI
         void PerformRaycasts()
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Specify layer priorities here
+            // Specify layer priorities here, order matters
             if (RaycastForEnemy(ray)) {return;}
             if (RaycastForPotentiallyWalkable(ray)) { return; }
         }
