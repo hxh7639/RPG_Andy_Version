@@ -18,8 +18,10 @@ namespace RPG.Characters
         [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
 
-        Animator animator;
+        // Temporarily serialized for dugging
+        [SerializeField] SpecialAbilityConfig ability1;
 
+        Animator animator;
         float currentHealthPoints;
         CameraRaycaster cameraRaycaster;
         float lastHitTime = 0f;
@@ -39,6 +41,7 @@ namespace RPG.Characters
             SetCurrentMaxHealth();
             SpawnWeaponInHand();
             SetupRuntimeAnimator();
+            ability1.AddComponent(gameObject);
         }
 
         public void TakeDamage(float Damage)
@@ -67,12 +70,27 @@ namespace RPG.Characters
 
         void OnMouseOverEnemy(Enemy enemy) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
         {
-            if (Input.GetMouseButton(0) && IsTargetInRange (enemy.gameObject)) // enemy.gameobject selects the parent gameObject for the enemy script
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject)) // enemy.gameobject selects the parent gameObject for the enemy script
             {
-                    AttackTarget(enemy);
+                AttackTarget(enemy);
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                AttempSpecialAbility1(enemy);
             }
         }
 
+        private void AttempSpecialAbility1(Enemy enemy)
+        {
+            var energyComponent = GetComponent<Energy>();
+
+            if (energyComponent.IsEnergyAvailable(10f)) // TODO read from Scripttible Object
+            {
+                energyComponent.ConsumeEnergy(10f);
+                // TODO Use the ability
+            }
+
+        }
 
         private void AttackTarget(Enemy enemy)
         {
