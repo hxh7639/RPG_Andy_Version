@@ -8,7 +8,7 @@ namespace RPG.Characters
     public class PowerAttackConfig : SpecialAbility
     {
         [Header("Power Attack Specifics")]
-        float extraDamage = 10f;
+        [SerializeField]float extraDamage = 10f;
 
         public override void AttachComponentTo(GameObject gameObejctToAttachTo)
         {

@@ -83,9 +83,9 @@ namespace RPG.Characters
         private void AttempSpecialAbility(int abilityIndex, Enemy enemy)
         {
             var energyComponent = GetComponent<Energy>();
-            var energyCost = abilities[abilityIndex].GetEnergyCost();
+            var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
 
-            if (energyComponent.IsEnergyAvailable(energyCost)) // TODO read from Scripttible Object
+            if (energyComponent.IsEnergyAvailable(energyCost))
             {
                 energyComponent.ConsumeEnergy(energyCost);
                 var abilityParams = new AbilityUseParams(enemy, baseDamage);
