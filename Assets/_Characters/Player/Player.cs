@@ -14,12 +14,12 @@ namespace RPG.Characters
     {
 
         [SerializeField] float maxHealthPoints = 100;
-        [SerializeField] float damagePerHit = 10f;
+        [SerializeField] float baseDamage = 11f;
         [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
 
         // Temporarily serialized for dugging
-        [SerializeField] SpecialAbilityConfig[] abilities;
+        [SerializeField] SpecialAbility[] abilities;
 
         Animator animator;
         float currentHealthPoints;
@@ -83,11 +83,13 @@ namespace RPG.Characters
         private void AttempSpecialAbility(int abilityIndex, Enemy enemy)
         {
             var energyComponent = GetComponent<Energy>();
+            var energyCost = abilities[abilityIndex].GetEnergyCost();
 
-            if (energyComponent.IsEnergyAvailable(10f)) // TODO read from Scripttible Object
+            if (energyComponent.IsEnergyAvailable(energyCost)) // TODO read from Scripttible Object
             {
-                energyComponent.ConsumeEnergy(10f);
-                abilities[abilityIndex].Use();
+                energyComponent.ConsumeEnergy(energyCost);
+                var abilityParams = new AbilityUseParams(enemy, baseDamage);
+                abilities[abilityIndex].Use(abilityParams);
                 // TODO Use the ability
             }
 
@@ -98,7 +100,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger("Attack"); // TODO make const
-                enemy.TakeDamage(damagePerHit);
+                enemy.TakeDamage(baseDamage);
                 lastHitTime = Time.time;
             }
         }

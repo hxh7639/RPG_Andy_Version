@@ -6756,7 +6756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 1000
-  damagePerHit: 50
+  baseDamage: 50
   weaponInUse: {fileID: 11400000, guid: 0a75f17ac73ff7f4f8c0108260d75895, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: ace0150b1b58c754d9b56f1db756e8c4,
     type: 2}
