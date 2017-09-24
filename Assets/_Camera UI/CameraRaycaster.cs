@@ -13,7 +13,9 @@ namespace RPG.CameraUI
         [SerializeField] Vector2 cursorHotspot = new Vector2(0, 0);
 
         const int POTENTIALLY_WALKABLE_LAYER = 8;
-        float maxRaycastDepth = 100f; // Hard coded value
+        float maxRaycastDepth = 300f; // Hard coded value, Course used 100f
+
+        Rect screenRectAtStartPlay = new Rect(0, 0, Screen.width, Screen.height); // move inside update to support screen resize
 
         // TODO remove once working
         int topPriorityLayerLastFrame = -1; // So get ? from start with Default layer terrain
@@ -41,10 +43,13 @@ namespace RPG.CameraUI
 
         void PerformRaycasts()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Specify layer priorities here, order matters
-            if (RaycastForEnemy(ray)) {return;}
-            if (RaycastForPotentiallyWalkable(ray)) { return; }
+            if (screenRectAtStartPlay.Contains(Input.mousePosition))  // if mouse is within the screenRect area, then Ray Cast
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // Specify layer priorities here, order matters
+                if (RaycastForEnemy(ray)) { return; }
+                if (RaycastForPotentiallyWalkable(ray)) { return; }
+            }
         }
 
 

@@ -33,8 +33,8 @@ namespace RPG.Weapons
 
         void OnCollisionEnter(Collision collision)
         {
-            var layCollidedWith = collision.gameObject.layer;
-            if (shooter && layCollidedWith != shooter.layer) //TODO Bug to be fixed later in course
+            var layerCollidedWith = collision.gameObject.layer;
+            if (shooter && layerCollidedWith != shooter.layer) //TODO Bug to be fixed later in course (my thought is to move coolidedwith shooter layer to the damageable area and exclude it with the if statement.
             {
                 DamageDamageable(collision);
             }
