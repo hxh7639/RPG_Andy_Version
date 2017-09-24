@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Levels/Andy's Village.unity
     guid: 84fa7e77223b5b64996916f85b7ea496
+  - enabled: 0
+    path: Assets/_Levels/Asset Showcase Scene.unity
+    guid: 59cf45ae0ced41f44b8e3253055eafae

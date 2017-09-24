@@ -6,7 +6,8 @@ using UnityEngine.Assertions;
 // TODO consider re-wiring, don't want Player script to be affected by CameraUI, core,and weapons
 using RPG.CameraUI; 
 using RPG.Core; 
-using RPG.Weapons; 
+using RPG.Weapons;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -44,9 +45,30 @@ namespace RPG.Characters
             abilities[0].AttachComponentTo(gameObject);
         }
 
-        public void TakeDamage(float Damage)
+        public void TakeDamage(float damage)
         {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints);
+            ReduceHealth(damage);
+            bool playerDies = (currentHealthPoints - damage <= 0); // if this is true, player died
+            if (playerDies)
+            {
+                ReduceHealth(damage);
+                StartCoroutine(KillPlayer());
+            }
+        }
+
+        IEnumerator KillPlayer()
+        {
+            Debug.Log("Play death sound");// play death sound
+            Debug.Log("Trigger Death Animation");// trigger death animation
+            yield return new WaitForSecondsRealtime(3f);  //TODO use death animation/sound length
+            SceneManager.LoadScene(1); // reload scene (or go to death screen) - (Use SceneManager) 
+        }
+
+        private void ReduceHealth(float damage)
+        {
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+            // play sound
+
         }
 
         private void SetCurrentMaxHealth()
