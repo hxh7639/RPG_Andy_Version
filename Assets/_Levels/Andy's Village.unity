@@ -1465,11 +1465,6 @@ Prefab:
       propertyPath: energyBarImage
       value: 
       objectReference: {fileID: 1532512512}
-    - target: {fileID: 195478948668055096, guid: 9fc96701a986ba84b9f6f95bde7f1d21,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fc96701a986ba84b9f6f95bde7f1d21, type: 2}
   m_IsPrefabParent: 0
