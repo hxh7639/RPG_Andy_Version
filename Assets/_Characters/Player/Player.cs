@@ -25,6 +25,9 @@ namespace RPG.Characters
         // Temporarily serialized for dugging
         [SerializeField] SpecialAbility[] abilities;
 
+        const string DEATH_TRIGGER = "Death";
+        const string ATTACK_TRIGGER = "Attack";
+
         AudioSource audioSource;
         Animator animator;
         float currentHealthPoints;
@@ -52,10 +55,8 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
+            bool playerDies = (currentHealthPoints - damage <= 0); // if this is true, player died.. Must ask before reducing health
             ReduceHealth(damage);
-            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
-            audioSource.Play();
-            bool playerDies = (currentHealthPoints - damage <= 0); // if this is true, player died
             if (playerDies)
             {
                 ReduceHealth(damage);
@@ -65,17 +66,21 @@ namespace RPG.Characters
 
         IEnumerator KillPlayer()
         {
+            // trigger deather animation
+            animator.SetTrigger(DEATH_TRIGGER);
+            //play death sound
             audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
             audioSource.Play();
-            Debug.Log("Trigger Death Animation");// trigger death animation
-            yield return new WaitForSecondsRealtime(audioSource.clip.length);
+            // wait and load the scene
+            yield return new WaitForSecondsRealtime(audioSource.clip.length); 
             SceneManager.LoadScene(1); // reload scene (or go to death screen) - (Use SceneManager) 
         }
 
         private void ReduceHealth(float damage)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            // play sound
+            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
+            audioSource.Play();
 
         }
 
@@ -129,7 +134,7 @@ namespace RPG.Characters
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
-                animator.SetTrigger("Attack"); // TODO make const
+                animator.SetTrigger(ATTACK_TRIGGER);
                 enemy.TakeDamage(baseDamage);
                 lastHitTime = Time.time;
             }
