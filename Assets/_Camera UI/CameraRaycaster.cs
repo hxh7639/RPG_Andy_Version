@@ -15,7 +15,7 @@ namespace RPG.CameraUI
         const int POTENTIALLY_WALKABLE_LAYER = 8;
         float maxRaycastDepth = 300f; // Hard coded value, Course used 100f
 
-        Rect screenRectAtStartPlay = new Rect(0, 0, Screen.width, Screen.height); // move inside update to support screen resize
+        Rect currentScreenRect = new Rect();
 
         // TODO remove once working
         int topPriorityLayerLastFrame = -1; // So get ? from start with Default layer terrain
@@ -30,6 +30,7 @@ namespace RPG.CameraUI
 
         void Update()
         {
+            currentScreenRect = new Rect(0, 0, Screen.width, Screen.height);
             // Check if pointer is over an interactable UI element
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -43,7 +44,7 @@ namespace RPG.CameraUI
 
         void PerformRaycasts()
         {
-            if (screenRectAtStartPlay.Contains(Input.mousePosition))  // if mouse is within the screenRect area, then Ray Cast
+            if (currentScreenRect.Contains(Input.mousePosition))  // if mouse is within the screenRect area, then Ray Cast
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 // Specify layer priorities here, order matters
