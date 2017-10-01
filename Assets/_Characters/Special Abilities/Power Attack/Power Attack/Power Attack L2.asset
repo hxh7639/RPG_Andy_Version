@@ -8,9 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a312b7702b8dafa438edc4bb1aadd6f4, type: 3}
-  m_Name: Area Effect L1
+  m_Script: {fileID: 11500000, guid: 5b10d815353c79d4e916ecc71a443617, type: 3}
+  m_Name: Power Attack L2
   m_EditorClassIdentifier: 
   energyCost: 10
-  Radius: 5
-  damageToEachTarget: 15
+  particlePrefab: {fileID: 1889911168863976, guid: 13d1e62fe7b2be245a83e10ec45610a4,
+    type: 2}
+  extraDamage: 10

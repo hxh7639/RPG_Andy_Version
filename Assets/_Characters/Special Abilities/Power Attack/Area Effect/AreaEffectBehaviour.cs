@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Characters;
 using RPG.Core;
+using System;
+using UnityEngine;
 
 public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 {
     AreaEffectConfig config;
+    ParticleSystem myParticleSystem;
+
     public void SetConfig(AreaEffectConfig configToSet) // setter
     {
         this.config = configToSet;
@@ -26,11 +30,28 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 
     public void Use(AbilityUseParams useParams)
     {
+        DealRadialDamage(useParams);
+        PlayParticleEffect();
+    }
+
+    private void PlayParticleEffect()
+    {
+        Debug.Log("AOE Particle triggered");
+        var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
+        // Instantiate a particle system attached to player
+        // Get the particle system
+        // Play particle system
+        // Destroy after a duration
+
+    }
+
+    private void DealRadialDamage(AbilityUseParams useParams)
+    {
         print("Area Effect used by: " + gameObject.name);
         // Static sphere cast for targets
         RaycastHit[] hits = Physics.SphereCastAll(
-            transform.position, 
-            config.GetRadius(), 
+            transform.position,
+            config.GetRadius(),
             Vector3.up, // direction does not matter so just pick a direction 
             config.GetRadius()
             );

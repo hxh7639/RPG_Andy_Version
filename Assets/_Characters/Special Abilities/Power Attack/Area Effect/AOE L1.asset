@@ -8,10 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b10d815353c79d4e916ecc71a443617, type: 3}
-  m_Name: Power Attack L1
+  m_Script: {fileID: 11500000, guid: a312b7702b8dafa438edc4bb1aadd6f4, type: 3}
+  m_Name: AOE L1
   m_EditorClassIdentifier: 
-  energyCost: 25
-  particlePrefab: {fileID: 1823086715253824, guid: 84ab5368560cd9b4eb45365a311edcd1,
+  energyCost: 10
+  particlePrefab: {fileID: 1151174427341858, guid: f284caaf8c02804498b94ce9d25be941,
     type: 2}
-  extraDamage: 10
+  Radius: 5
+  damageToEachTarget: 15
