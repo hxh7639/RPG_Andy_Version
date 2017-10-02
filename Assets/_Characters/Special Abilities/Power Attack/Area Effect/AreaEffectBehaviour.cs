@@ -4,13 +4,11 @@ using UnityEngine;
 using RPG.Characters;
 using RPG.Core;
 using System;
-using UnityEngine;
 
 public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 {
     AreaEffectConfig config;
-    ParticleSystem myParticleSystem;
-
+    
     public void SetConfig(AreaEffectConfig configToSet) // setter
     {
         this.config = configToSet;
@@ -37,12 +35,11 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
     private void PlayParticleEffect()
     {
         Debug.Log("AOE Particle triggered");
-        var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
-        // Instantiate a particle system attached to player
-        // Get the particle system
-        // Play particle system
-        // Destroy after a duration
-
+        var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity); // create the particle prefab at its current location (area effect, which is the player's location)
+        // TODO decide if particle system attaches to player
+        ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>(); // myParticleSystem set as the particle system on my prefab 
+        myParticleSystem.Play();
+        Destroy(prefab, myParticleSystem.main.duration);  // could use coroutines but its much more complicated, not necessary in this case.   destroy so it is not in the game anymore.
     }
 
     private void DealRadialDamage(AbilityUseParams useParams)
