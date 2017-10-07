@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b10d815353c79d4e916ecc71a443617, type: 3}
-  m_Name: Power Attack L1
+  m_Name: PA_L2
   m_EditorClassIdentifier: 
-  energyCost: 25
-  particlePrefab: {fileID: 1823086715253824, guid: 84ab5368560cd9b4eb45365a311edcd1,
+  energyCost: 10
+  particlePrefab: {fileID: 1889911168863976, guid: 13d1e62fe7b2be245a83e10ec45610a4,
     type: 2}
   extraDamage: 10

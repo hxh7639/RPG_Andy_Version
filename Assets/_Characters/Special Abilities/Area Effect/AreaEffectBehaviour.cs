@@ -62,7 +62,7 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
             {
                 // deal damage to target + player base damage
                 float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget(); // AOE damage calulation
-                damageable.TakeDamage(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
+                damageable.AdjustHealth(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
             }
         }
     }

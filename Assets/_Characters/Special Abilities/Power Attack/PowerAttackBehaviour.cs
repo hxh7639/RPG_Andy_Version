@@ -46,7 +46,7 @@ namespace RPG.Characters
         private void DealDamage(AbilityUseParams useParams)
         {
             float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
-            useParams.target.TakeDamage(damageToDeal);
+            useParams.target.AdjustHealth(damageToDeal);
         }
     }
 }

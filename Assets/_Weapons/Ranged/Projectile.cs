@@ -45,7 +45,7 @@ namespace RPG.Weapons
             Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
             if (damageableComponent)
             {
-                (damageableComponent as IDamageable).TakeDamage(damageCaused);
+                (damageableComponent as IDamageable).AdjustHealth(damageCaused);
             }
             Destroy(gameObject, DESTORY_DELAY);
         }

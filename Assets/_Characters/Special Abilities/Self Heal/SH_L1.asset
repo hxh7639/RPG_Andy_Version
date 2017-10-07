@@ -8,11 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a312b7702b8dafa438edc4bb1aadd6f4, type: 3}
-  m_Name: AOE L1
+  m_Script: {fileID: 11500000, guid: 676539c0dec2c4249b67256b6899b105, type: 3}
+  m_Name: SH_L1
   m_EditorClassIdentifier: 
-  energyCost: 10
-  particlePrefab: {fileID: 1151174427341858, guid: f284caaf8c02804498b94ce9d25be941,
-    type: 2}
-  Radius: 5
-  damageToEachTarget: 15
+  energyCost: 50
+  particlePrefab: {fileID: 0}
+  extraHealth: 500
