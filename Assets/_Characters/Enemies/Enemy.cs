@@ -28,7 +28,7 @@ namespace RPG.Characters
         float currentHealthPoints;
         AICharacterControl aiCharacterControl = null;
 
-        public void AdjustHealth(float Damage)
+        public void TakDamage(float Damage)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints); //TODO switch to coroutines
             if (currentHealthPoints <= 0f)

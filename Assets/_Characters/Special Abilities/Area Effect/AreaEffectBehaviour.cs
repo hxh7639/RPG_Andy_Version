@@ -8,19 +8,18 @@ using System;
 public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 {
     AreaEffectConfig config;
-    
+    AudioSource audioSource = null;
+
     public void SetConfig(AreaEffectConfig configToSet) // setter
     {
         this.config = configToSet;
     }
 
-    // Use this for initialization
     void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -30,6 +29,8 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
     {
         DealRadialDamage(useParams);
         PlayParticleEffect();
+        audioSource.clip = config.getAudioClip();
+        audioSource.Play();
     }
 
     private void PlayParticleEffect()
@@ -60,7 +61,7 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
             {
                 // deal damage to target + player base damage
                 float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget(); // AOE damage calulation
-                damageable.AdjustHealth(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
+                damageable.TakDamage(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
             }
         }
     }

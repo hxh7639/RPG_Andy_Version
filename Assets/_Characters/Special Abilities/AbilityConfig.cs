@@ -17,11 +17,12 @@ namespace RPG.Characters
         }
     }
 
-    public abstract class SpecialAbility : ScriptableObject  // abstract class, see lecture 109 Storing special ability
+    public abstract class AbilityConfig : ScriptableObject  // abstract class, see lecture 109 Storing special ability
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particlePrefab = null;
+        [SerializeField] AudioClip audioClip = null;
 
         protected ISpecialAbility behaviour;
 
@@ -43,11 +44,20 @@ namespace RPG.Characters
 
         }
 
+        public AudioClip getAudioClip()
+        {
+            return audioClip;
+        }
+
     }
 
-    public interface ISpecialAbility
+    public interface ISpecialAbility // so other method with ISpecialAbility, can just do "config.xxx"
     {
         void Use(AbilityUseParams useParams);
     }
+
+
+
+
 
 }
