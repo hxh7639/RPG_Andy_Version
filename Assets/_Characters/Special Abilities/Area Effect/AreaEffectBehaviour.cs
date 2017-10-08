@@ -17,7 +17,7 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
     // Use this for initialization
     void Start()
     {
-        print("Area Effect behaviour attached to " + gameObject.name);
+
     }
 
     // Update is called once per frame
@@ -34,7 +34,6 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 
     private void PlayParticleEffect()
     {
-        Debug.Log("AOE Particle triggered");
         var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity); // create the particle prefab at its current location (area effect, which is the player's location)
         // TODO decide if particle system attaches to player
         ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>(); // myParticleSystem set as the particle system on my prefab 
@@ -44,8 +43,7 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
 
     private void DealRadialDamage(AbilityUseParams useParams)
     {
-        print("Area Effect used by: " + gameObject.name);
-        // Static sphere cast for targets
+         // Static sphere cast for targets
         RaycastHit[] hits = Physics.SphereCastAll(
             transform.position,
             config.GetRadius(),
@@ -57,8 +55,8 @@ public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
         foreach (RaycastHit hit in hits)
         {
             var damageable = hit.collider.gameObject.GetComponent<IDamageable>(); // see if the hit object has an IDamageable component
-            // if damagable 
-            if (damageable != null)
+            bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+            if (damageable != null && !hitPlayer)
             {
                 // deal damage to target + player base damage
                 float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget(); // AOE damage calulation

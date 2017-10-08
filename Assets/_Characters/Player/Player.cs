@@ -28,10 +28,11 @@ namespace RPG.Characters
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
 
-        AudioSource audioSource;
-        Animator animator;
-        float currentHealthPoints;
-        CameraRaycaster cameraRaycaster;
+        Enemy enemy = null;
+        AudioSource audioSource = null;
+        Animator animator = null;
+        float currentHealthPoints = 0;
+        CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
 
 
@@ -49,8 +50,35 @@ namespace RPG.Characters
             SetCurrentMaxHealth();
             SpawnWeaponInHand();
             SetupRuntimeAnimator();
+            AttachInitialAbilities();
+
             abilities[0].AttachComponentTo(gameObject);
             audioSource = GetComponent<AudioSource>();
+        }
+
+        private void AttachInitialAbilities()
+        {
+            for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
+            abilities[abilityIndex].AttachComponentTo(gameObject);
+        }
+
+        private void Update()
+        {
+            if (healthAsPercentage > Mathf.Epsilon) // 
+            {
+                ScanForAbilityKeyDown();
+            }
+        }
+
+        private void ScanForAbilityKeyDown()
+        {
+            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++) // starting at 1, loop through the total abilities created
+            {
+                if (Input.GetKeyDown(keyIndex.ToString()))
+                {
+                    AttempSpecialAbility(keyIndex);
+                }
+            }
         }
 
         public void AdjustHealth(float changePoints)
@@ -103,19 +131,20 @@ namespace RPG.Characters
 
         }
 
-        void OnMouseOverEnemy(Enemy enemy) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
+        void OnMouseOverEnemy(Enemy enemyToSet) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
         {
+            this.enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject)) // enemy.gameobject selects the parent gameObject for the enemy script
             {
-                AttackTarget(enemy);
+                AttackTarget();
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                AttempSpecialAbility(0, enemy);
+                AttempSpecialAbility(0);
             }
         }
 
-        private void AttempSpecialAbility(int abilityIndex, Enemy enemy)
+        private void AttempSpecialAbility(int abilityIndex)
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
@@ -130,7 +159,7 @@ namespace RPG.Characters
 
         }
 
-        private void AttackTarget(Enemy enemy)
+        private void AttackTarget()
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
