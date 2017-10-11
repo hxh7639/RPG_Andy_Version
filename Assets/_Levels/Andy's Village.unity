@@ -974,6 +974,11 @@ Prefab:
       propertyPath: energyOrbImage
       value: 
       objectReference: {fileID: 46580170}
+    - target: {fileID: 199609440280608828, guid: 9fc96701a986ba84b9f6f95bde7f1d21,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fc96701a986ba84b9f6f95bde7f1d21, type: 2}
   m_IsPrefabParent: 0

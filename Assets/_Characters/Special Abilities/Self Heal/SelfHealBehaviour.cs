@@ -33,8 +33,8 @@ namespace RPG.Characters
 
         private void PlayParticleEffect()
         {
-            Debug.Log("AOE Particle triggered");
-            var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity); // create the particle prefab at its current location (area effect, which is the player's location)
+            var particlePrefab = config.GetParticlePrefab();
+            var prefab = Instantiate(particlePrefab, transform.position, particlePrefab.transform.rotation); // create the particle prefab at its current location (area effect, which is the player's location)
             prefab.transform.parent = transform; //decide if particle system attaches to player, with this line it follows the player
             ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>(); // myParticleSystem set as the particle system on my prefab 
             myParticleSystem.Play();
