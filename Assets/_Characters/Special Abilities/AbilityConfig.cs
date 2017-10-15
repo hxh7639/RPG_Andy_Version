@@ -24,7 +24,7 @@ namespace RPG.Characters
         [SerializeField] GameObject particlePrefab = null;
         [SerializeField] AudioClip audioClip = null;
 
-        protected ISpecialAbility behaviour;
+        protected AbilityBehaviour behaviour;
 
         abstract public void AttachComponentTo(GameObject gameObejctToAttachTo);
 
@@ -50,14 +50,5 @@ namespace RPG.Characters
         }
 
     }
-
-    public interface ISpecialAbility // so other method with ISpecialAbility, can just do "config.xxx"
-    {
-        void Use(AbilityUseParams useParams);
-    }
-
-
-
-
 
 }
