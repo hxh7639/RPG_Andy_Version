@@ -7,13 +7,9 @@ using System;
 
 public class AreaEffectBehaviour : AbilityBehaviour
 {
-    AreaEffectConfig config;
     AudioSource audioSource = null;
 
-    public void SetConfig(AreaEffectConfig configToSet) // setter
-    {
-        this.config = configToSet;
-    }
+
 
     void Start()
     {
@@ -33,24 +29,16 @@ public class AreaEffectBehaviour : AbilityBehaviour
         audioSource.Play();
     }
 
-    private void PlayParticleEffect()
-    {
-        var particlePrefab = config.GetParticlePrefab();
-        var prefab = Instantiate(particlePrefab, transform.position, particlePrefab.transform.rotation); // create the particle prefab at its current location (area effect, which is the player's location)
-        // TODO decide if particle system attaches to player
-        ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>(); // myParticleSystem set as the particle system on my prefab 
-        myParticleSystem.Play();
-        Destroy(prefab, myParticleSystem.main.duration);  // could use coroutines but its much more complicated, not necessary in this case.   destroy so it is not in the game anymore.
-    }
+
 
     private void DealRadialDamage(AbilityUseParams useParams)
     {
          // Static sphere cast for targets
         RaycastHit[] hits = Physics.SphereCastAll(
             transform.position,
-            config.GetRadius(),
+            (config as AreaEffectConfig).GetRadius(),
             Vector3.up, // direction does not matter so just pick a direction 
-            config.GetRadius()
+            (config as AreaEffectConfig).GetRadius()
             );
 
         // for each hit
@@ -61,7 +49,7 @@ public class AreaEffectBehaviour : AbilityBehaviour
             if (damageable != null && !hitPlayer)
             {
                 // deal damage to target + player base damage
-                float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget(); // AOE damage calulation
+                float damageToDeal = useParams.baseDamage + (config as AreaEffectConfig).GetDamageToEachTarget(); // AOE damage calulation
                 damageable.TakDamage(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
             }
         }
