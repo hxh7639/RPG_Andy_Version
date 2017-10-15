@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Characters
@@ -38,7 +37,14 @@ namespace RPG.Characters
             }
             Destroy(particlePrefab);
             yield return new WaitForEndOfFrame(); // just returning something because corutine is expecting us to return something 
-
         }
+
+        protected void PlayAbilitySound()
+        {
+            var abilitySound = config.GetRandomAbilitySound();
+            var audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(abilitySound); // using PlayOneShot, sound would play on top of each other w/o being cut out
+        }
+
     }
 }

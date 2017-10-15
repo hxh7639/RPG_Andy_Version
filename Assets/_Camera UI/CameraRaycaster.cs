@@ -17,9 +17,6 @@ namespace RPG.CameraUI
 
         Rect currentScreenRect = new Rect();
 
-        // TODO remove once working
-        int topPriorityLayerLastFrame = -1; // So get ? from start with Default layer terrain
-
         public delegate void OnMouseOverEnemy(Enemy enemy);
         public event OnMouseOverEnemy onMouseOverEnemy;
 

@@ -7,26 +7,11 @@ using System;
 
 public class AreaEffectBehaviour : AbilityBehaviour
 {
-    AudioSource audioSource = null;
-
-
-
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
-
-    }
-
     public override void Use(AbilityUseParams useParams)
     {
+        PlayAbilitySound();
         DealRadialDamage(useParams);
         PlayParticleEffect();
-        audioSource.clip = config.getAudioClip();
-        audioSource.Play();
     }
 
 
