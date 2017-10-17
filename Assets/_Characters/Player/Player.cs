@@ -55,14 +55,14 @@ namespace RPG.Characters
             SetupRuntimeAnimator();
             AttachInitialAbilities();
 
-            abilities[0].AttachComponentTo(gameObject);
+            abilities[0].AttachAbilityTo(gameObject);
             audioSource = GetComponent<AudioSource>();
         }
 
         private void AttachInitialAbilities()
         {
             for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
-            abilities[abilityIndex].AttachComponentTo(gameObject);
+            abilities[abilityIndex].AttachAbilityTo(gameObject);
         }
 
         private void Update()
