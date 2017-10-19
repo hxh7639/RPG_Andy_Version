@@ -1136,6 +1136,53 @@ Transform:
   m_PrefabParentObject: {fileID: 4159277622895012, guid: 2bc2f5112e993ff44a83e4fad16f422e,
     type: 2}
   m_PrefabInternal: {fileID: 1724550130}
+--- !u!1001 &411951864
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1441645029}
+    m_Modifications:
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 93.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 8.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -55.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+      propertyPath: m_RootOrder
+      value: 30
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 1096437dafb17c240bd961e55ed9627a, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &411951865 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4641249521038890, guid: 1096437dafb17c240bd961e55ed9627a,
+    type: 2}
+  m_PrefabInternal: {fileID: 411951864}
 --- !u!4 &429152066 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4116914026072202, guid: 771d470fadfa55043ac1e3f0551c9bcb,
@@ -3937,6 +3984,7 @@ Transform:
   - {fileID: 620460482}
   - {fileID: 614779504}
   - {fileID: 912138936}
+  - {fileID: 411951865}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
