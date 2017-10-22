@@ -6,7 +6,6 @@ using UnityEngine.Assertions;
 // TODO consider re-wiring, don't want Player script to be affected by CameraUI, core,and weapons
 using RPG.CameraUI; 
 using RPG.Core; 
-using RPG.Weapons;
 using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
@@ -16,7 +15,7 @@ namespace RPG.Characters
 
         [SerializeField] float maxHealthPoints = 100;
         [SerializeField] float baseDamage = 11f;
-        [SerializeField] Weapon weaponInUse = null;
+        [SerializeField] Weapon CurrentWeaponConfig = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
@@ -29,6 +28,7 @@ namespace RPG.Characters
 
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
+        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
 
         Enemy enemy = null;
@@ -37,6 +37,7 @@ namespace RPG.Characters
         float currentHealthPoints = 0;
         CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
+        GameObject weaponObject;
 
 
         public float healthAsPercentage
@@ -51,12 +52,23 @@ namespace RPG.Characters
         {
             RegisterForMouseClick();
             SetCurrentMaxHealth();
-            SpawnWeaponInHand();
-            SetupRuntimeAnimator();
+            PutWeaponInHand(CurrentWeaponConfig);
+            SetAttackAnimation();
             AttachInitialAbilities();
 
             abilities[0].AttachAbilityTo(gameObject);
             audioSource = GetComponent<AudioSource>();
+        }
+
+        public void PutWeaponInHand(Weapon weaponToUse)
+        {
+            CurrentWeaponConfig = weaponToUse;
+            var weaponPrefab = weaponToUse.GetWeaponPrefab();
+            GameObject mainHand = RequestMainHand();
+            Destroy(weaponObject); //empty out player hands
+            weaponObject = Instantiate(weaponPrefab, mainHand.transform);
+            weaponObject.transform.localPosition = CurrentWeaponConfig.gripTransform.localPosition;
+            weaponObject.transform.localRotation = CurrentWeaponConfig.gripTransform.localRotation;
         }
 
         private void AttachInitialAbilities()
@@ -120,11 +132,11 @@ namespace RPG.Characters
             currentHealthPoints = maxHealthPoints;
         }
 
-        private void SetupRuntimeAnimator() 
+        private void SetAttackAnimation() 
         {
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["DEFAULT ATTACK"] = weaponInUse.GetAttackAnimClip(); //TODO remove const
+            animatorOverrideController[DEFAULT_ATTACK] = CurrentWeaponConfig.GetAttackAnimClip();
         }
 
         private void RegisterForMouseClick()
@@ -164,8 +176,9 @@ namespace RPG.Characters
 
         private void AttackTarget()
         {
-            if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
+            if (Time.time - lastHitTime > CurrentWeaponConfig.GetMinTimeBetweenHits())
             {
+                SetAttackAnimation();
                 animator.SetTrigger(ATTACK_TRIGGER);
                 enemy.TakDamage(CalculateDamage()); 
                 lastHitTime = Time.time;
@@ -176,7 +189,7 @@ namespace RPG.Characters
         {
 
             bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance; // calculate crits
-            float damageBeforeCritical = baseDamage + weaponInUse.GetAdditionalDamage();
+            float damageBeforeCritical = baseDamage + CurrentWeaponConfig.GetAdditionalDamage();
             if (isCriticalHit)
             {
                 criticalHitParticle.Play();
@@ -191,18 +204,9 @@ namespace RPG.Characters
         private bool IsTargetInRange(GameObject target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= weaponInUse.GetMaxAttackRange();
+            return distanceToTarget <= CurrentWeaponConfig.GetMaxAttackRange();
         }
 
-        void SpawnWeaponInHand()
-        {
-            var weaponPrefab = weaponInUse.GetWeaponPrefab();
-            GameObject mainHand = RequestMainHand();
-            var weapon = Instantiate(weaponPrefab, mainHand.transform);
-            weapon.transform.localPosition = weaponInUse.gripTransform.localPosition;
-            weapon.transform.localRotation = weaponInUse.gripTransform.localRotation;
-
-        }
 
         private GameObject RequestMainHand()  // find main hand
         {
