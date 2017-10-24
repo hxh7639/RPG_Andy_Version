@@ -1,27 +1,24 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
-using RPG.CameraUI; // TODO consider re-wiring, don't want Player script to be affected by CameraUI
+
 
 namespace RPG.Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(AICharacterControl))]
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class PlayerMovement : MonoBehaviour
     {
         ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
-        CameraRaycaster cameraRaycaster = null;
+        CameraUI.CameraRaycaster cameraRaycaster = null;
         Vector3 clickPoint;
-        AICharacterControl aiCharacterControl = null;
         GameObject walkTarget = null;
 
 
         void Start()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster = Camera.main.GetComponent<CameraUI.CameraRaycaster>();
             thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
-            aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 
 
@@ -34,7 +31,7 @@ namespace RPG.Characters
             if (Input.GetMouseButton(0))
             {
                 walkTarget.transform.position = destination;
-                aiCharacterControl.SetTarget(walkTarget.transform);
+                // aiCharacterControl.SetTarget(walkTarget.transform);
             }
         }
 
@@ -43,7 +40,7 @@ namespace RPG.Characters
             if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
                 // navigate to the enemy
-                aiCharacterControl.SetTarget(enemy.transform);
+                // aiCharacterControl.SetTarget(enemy.transform);
             }
         }
 
