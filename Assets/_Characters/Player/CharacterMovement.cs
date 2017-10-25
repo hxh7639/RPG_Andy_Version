@@ -1,29 +1,48 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.CameraUI;
 
 
 namespace RPG.Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(ThirdPersonCharacter))]
-    public class PlayerMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
-        ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
-        CameraUI.CameraRaycaster cameraRaycaster = null;
+        [SerializeField] float stoppingDistance = 1f;
+
+        ThirdPersonCharacter Character;   // A reference to the ThirdPersonCharacter on the object
         Vector3 clickPoint;
-        GameObject walkTarget = null;
+        GameObject walkTarget;
+        NavMeshAgent agent;
 
 
         void Start()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraUI.CameraRaycaster>();
-            thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
+            CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            Character = GetComponent<ThirdPersonCharacter>();
             walkTarget = new GameObject("walkTarget");
 
+            agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updatePosition = true;
+            agent.stoppingDistance = stoppingDistance;
 
             cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;  // add function to do to observe onMouseOverEnemy event (when event happenes, tells observer, and observer does this function)
+        }
+
+        void Update()
+        {
+            if (agent.remainingDistance > agent.stoppingDistance)
+            {
+                Character.Move(agent.desiredVelocity, false, false);
+            }
+            else
+            {
+                Character.Move(Vector3.zero, false, false);
+            }
         }
 
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
@@ -31,7 +50,7 @@ namespace RPG.Characters
             if (Input.GetMouseButton(0))
             {
                 walkTarget.transform.position = destination;
-                // aiCharacterControl.SetTarget(walkTarget.transform);
+                agent.SetDestination(destination);
             }
         }
 
@@ -40,27 +59,12 @@ namespace RPG.Characters
             if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
             {
                 // navigate to the enemy
-                // aiCharacterControl.SetTarget(enemy.transform);
+                agent.SetDestination(enemy.transform.position);
             }
         }
 
 
 
-
-        // TODO make this get called again
-        private void ProcessDirectMent()
-        {
-            // read inputs
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
-            // calculate camera relative direction to move:
-
-            Vector3 camForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-            Vector3 move = v * camForward + h * Camera.main.transform.right;
-
-            thirdPersonCharacter.Move(move, false, false);
-        }
 
 
         //	void OnDrawGizmos()

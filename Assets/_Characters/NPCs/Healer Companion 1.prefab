@@ -1797,7 +1797,8 @@ MonoBehaviour:
   chaseRadius: 0.01
   attackRadius: 6
   damagePerShot: -1000
-  secondsBetweenShots: 3
+  firingPeriodInS: 0.5
+  firingPeriodVariation: 0.1
   aimOffset: {x: 0, y: 1, z: 0}
   projectileToUse: {fileID: 1712084283902998, guid: 8131fbbc81e523946aaac2eebc02cc36,
     type: 2}
