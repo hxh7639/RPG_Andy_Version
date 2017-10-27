@@ -37,11 +37,11 @@ namespace RPG.Characters
         {
             if (agent.remainingDistance > agent.stoppingDistance)
             {
-                Character.Move(agent.desiredVelocity, false, false);
+                Character.Move(agent.desiredVelocity);
             }
             else
             {
-                Character.Move(Vector3.zero, false, false);
+                Character.Move(Vector3.zero);
             }
         }
 

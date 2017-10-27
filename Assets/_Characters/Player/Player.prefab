@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 5426510}
   - component: {fileID: 13615390}
   - component: {fileID: 82122689547159042}
-  - component: {fileID: 11469404}
   - component: {fileID: 195478948668055096}
+  - component: {fileID: 11469404}
   - component: {fileID: 114002266994886160}
-  - component: {fileID: 114575471077664358}
   - component: {fileID: 114013185415488784}
   - component: {fileID: 114770427358389886}
   m_Layer: 11
@@ -3457,6 +3456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cd1b9ac3481c24d92cae95a0b070aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoppingDistance: 1
 --- !u!114 &114013185415488784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3470,7 +3470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 1000
   baseDamage: 50
-  weaponInUse: {fileID: 11400000, guid: d967bb14a5acc9847b553db5a4aad6b6, type: 2}
+  CurrentWeaponConfig: {fileID: 11400000, guid: d967bb14a5acc9847b553db5a4aad6b6,
+    type: 2}
   animatorOverrideController: {fileID: 22100000, guid: ace0150b1b58c754d9b56f1db756e8c4,
     type: 2}
   damageSounds:
@@ -3502,18 +3503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02848579df0641a47a48b58b15e7fc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114575471077664358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &114770427358389886
 MonoBehaviour:
   m_ObjectHideFlags: 1
