@@ -11,11 +11,16 @@ namespace RPG.Characters
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] float stoppingDistance = 1f;
+        [SerializeField] float moveSpeedMultiplier = 0.7f;
+        // TODO consider animationSpeedMultiplier
+
 
         ThirdPersonCharacter Character;   // A reference to the ThirdPersonCharacter on the object
         Vector3 clickPoint;
         GameObject walkTarget;
         NavMeshAgent agent;
+        Animator animator;
+        Rigidbody rigidBody;
 
 
         void Start()
@@ -23,6 +28,9 @@ namespace RPG.Characters
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             Character = GetComponent<ThirdPersonCharacter>();
             walkTarget = new GameObject("walkTarget");
+
+            animator = GetComponent<Animator>();
+            rigidBody = GetComponent<Rigidbody>();
 
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
@@ -60,6 +68,20 @@ namespace RPG.Characters
             {
                 // navigate to the enemy
                 agent.SetDestination(enemy.transform.position);
+            }
+        }
+
+        void OnAnimatorMove()
+        {
+            // we implement this function to override the default root motion.
+            // this allows us to modify the positional speed before it's applied.
+            if (Time.deltaTime > 0)
+            {
+                Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier) / Time.deltaTime;
+
+                // we preserve the existing y part of the current velocity.
+                velocity.y = rigidBody.velocity.y;
+                rigidBody.velocity = velocity;
             }
         }
 
