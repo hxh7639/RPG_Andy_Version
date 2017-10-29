@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using RPG.Core;
+using RPG.Core; // TODO consider re-wire
 
 namespace RPG.Characters
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable //TODO remove interface
     {
 
 
@@ -29,16 +29,15 @@ namespace RPG.Characters
         void Start()
         {
             player = FindObjectOfType<Player>();
-            currentHealthPoints = maxHealthPoints;
+        }
+
+        public void TakDamage(float amount)
+        {
+            // todo remove
         }
 
         void Update()
         {
-            if (player.healthAsPercentage <= Mathf.Epsilon)
-            {
-                StopAllCoroutines();
-                Destroy(this);
-            }
             // to walk to player (set player as target)
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)

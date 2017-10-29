@@ -105,7 +105,7 @@ namespace RPG.Characters
         {
             if (Input.GetMouseButton(0))
             {
-                walkTarget.transform.position = destination;
+
                 agent.SetDestination(destination);
             }
         }

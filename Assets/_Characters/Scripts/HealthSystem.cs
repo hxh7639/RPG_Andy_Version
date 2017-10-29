@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -13,9 +14,10 @@ namespace RPG.Characters
         [SerializeField] Image healthBar;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
+        [SerializeField] float deathVanishSeconds = 2.0f;
         // TODO maybe a parameter for character vanishing
         const string DEATH_TRIGGER = "Death";
-        float currentHealthPoints = 0;
+        public float currentHealthPoints;
         Animator animator;
         AudioSource audioSource = null;
         CharacterMovement characterMovement;
@@ -32,6 +34,8 @@ namespace RPG.Characters
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             characterMovement = GetComponent<CharacterMovement>();
+
+            currentHealthPoints = maxHealthPoints;
         }
 
         // Update is called once per frame
@@ -50,7 +54,7 @@ namespace RPG.Characters
 
         public void TakDamage(float damage)
         {
-            bool characterDies = currentHealthPoints - damage <= 0);
+            bool characterDies = (currentHealthPoints - damage <= 0);
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
             audioSource.PlayOneShot(clip);
@@ -75,13 +79,18 @@ namespace RPG.Characters
 
             var playerComponent = GetComponent<Player>();
             if (playerComponent && playerComponent.isActiveAndEnabled) // relying on lazy evaluation
+            {
+                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+                audioSource.Play();  // not oneshot here because we want to override any existing death sounds
+                // wait and load the scene
+                yield return new WaitForSecondsRealtime(audioSource.clip.length);
+                SceneManager.LoadScene(1); // reload scene (or go to death screen) - (Use SceneManager) 
+            }
+            else // assume is enemy for now, reconsider on other NPCs
+            {
+                DestroyObject(gameObject, deathVanishSeconds);
+            }
 
-            //play death sound
-            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-            audioSource.Play();
-            // wait and load the scene
-            yield return new WaitForSecondsRealtime(audioSource.clip.length);
-            SceneManager.LoadScene(1); // reload scene (or go to death screen) - (Use SceneManager) 
         }
 
     }

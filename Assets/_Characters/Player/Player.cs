@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
-    public class Player : MonoBehaviour, IDamageable
+    public class Player : MonoBehaviour
     {
 
 
@@ -31,6 +31,7 @@ namespace RPG.Characters
 
 
         Enemy enemy = null;
+        Animator animator = null;
         float currentHealthPoints = 0;
         CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
@@ -42,13 +43,11 @@ namespace RPG.Characters
         void Start()
         {
             RegisterForMouseClick();
-            SetCurrentMaxHealth();
             PutWeaponInHand(CurrentWeaponConfig);
             SetAttackAnimation();
             AttachInitialAbilities();
 
             abilities[0].AttachAbilityTo(gameObject);
-            audioSource = GetComponent<AudioSource>();
         }
 
         public void PutWeaponInHand(Weapon weaponToUse)
@@ -70,7 +69,8 @@ namespace RPG.Characters
 
         private void Update()
         {
-            if (healthAsPercentage > Mathf.Epsilon) // 
+            var healthPercentage = GetComponent<HealthSystem>().healthAsPercentage;
+            if (healthPercentage > Mathf.Epsilon) // 
             {
                 ScanForAbilityKeyDown();
             }
@@ -85,15 +85,6 @@ namespace RPG.Characters
                     AttempSpecialAbility(keyIndex);
                 }
             }
-        }
-
-        
-
-
-
-        private void SetCurrentMaxHealth()
-        {
-            currentHealthPoints = maxHealthPoints;
         }
 
         private void SetAttackAnimation() 
@@ -144,7 +135,6 @@ namespace RPG.Characters
             {
                 SetAttackAnimation();
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.TakDamage(CalculateDamage()); 
                 lastHitTime = Time.time;
             }
         }
