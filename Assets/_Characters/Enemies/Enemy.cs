@@ -9,7 +9,7 @@ namespace RPG.Characters
     public class Enemy : MonoBehaviour, IDamageable
     {
 
-        [SerializeField] float maxHealthPoints = 100f;
+
         [SerializeField] float chaseRadius = 15f;
 
         [SerializeField] float attackRadius = 5f;
@@ -23,24 +23,8 @@ namespace RPG.Characters
 
         bool isAttacking = false;
         Player player = null;
-        float currentHealthPoints;
+        
 
-        public void TakDamage(float Damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - Damage, 0f, maxHealthPoints); //TODO switch to coroutines
-            if (currentHealthPoints <= 0f)
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        public float healthAsPercentage
-        {
-            get
-            {
-                return currentHealthPoints / maxHealthPoints;
-            }
-        }
 
         void Start()
         {

@@ -67,6 +67,11 @@ namespace RPG.Characters
             UpdateAnimator();
         }
 
+        public void Kill()
+        {
+            // to allow death singnaling
+        }
+
         void SetForwardAndTurn(Vector3 movement)
         {
             // convert the world relative moveInput vector into a local-relative
