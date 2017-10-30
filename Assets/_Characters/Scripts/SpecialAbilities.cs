@@ -6,18 +6,26 @@ using UnityEngine.UI;
 
 namespace RPG.Characters
 {
-    public class Energy : MonoBehaviour
+    public class SpecialAbilities : MonoBehaviour
     {
-        [SerializeField] Image energyOrbImage = null;
+        // Temporarily serialized for debugging
+        [SerializeField] AbilityConfig[] abilities;
+
+        [SerializeField] Image energyBarImage;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 1f;
+        // TODO add outOfEnergy (sound);
 
-        CameraUI.CameraRaycaster cameraRaycaster;
         float currentEnergyPoints;
-        
+        AudioSource audioSource;
+
+        float energyAsPercentage { get { return currentEnergyPoints / maxEnergyPoints; } } // this is a getter, or you can make a method "EnergyAsPercentage()"
+
+
         // Use this for initialization
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             currentEnergyPoints = maxEnergyPoints;
             UpdateEnergyBar();
         }
@@ -51,12 +59,9 @@ namespace RPG.Characters
 
         private void UpdateEnergyBar()
         {
-            energyOrbImage.fillAmount = EnergyAsPercentage();
+            energyBarImage.fillAmount = energyAsPercentage();
         }
 
-        float EnergyAsPercentage()
-        {
-                return currentEnergyPoints / maxEnergyPoints;
-        }
+
     }
 }

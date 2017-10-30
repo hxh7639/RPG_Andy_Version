@@ -22,8 +22,7 @@ namespace RPG.Characters
         [SerializeField] float CriticalHitMultiplier = 1.25f;
         [SerializeField] ParticleSystem criticalHitParticle =null;
 
-        // Temporarily serialized for dugging
-        [SerializeField] AbilityConfig[] abilities;
+
 
 
         const string ATTACK_TRIGGER = "Attack";
@@ -116,7 +115,7 @@ namespace RPG.Characters
 
         private void AttempSpecialAbility(int abilityIndex)
         {
-            var energyComponent = GetComponent<Energy>();
+            var energyComponent = GetComponent<SpecialAbilities>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
 
             if (energyComponent.IsEnergyAvailable(energyCost))
