@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 114002266994886160}
   - component: {fileID: 114013185415488784}
   - component: {fileID: 114770427358389886}
-  - component: {fileID: 114899770813298784}
+  - component: {fileID: 114264273734085368}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -3438,11 +3438,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoppingDistance: 1
-  moveSpeedMultiplier: 1
-  movingTurnSpeed: 500
-  stationaryTurnSpeed: 500
+  moveSpeedMultiplier: 0.7
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
   moveThreshold: 1
-  animationSpeedMultiplier: 2
+  animationSpeedMultiplier: 1.5
 --- !u!114 &114013185415488784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3462,10 +3462,23 @@ MonoBehaviour:
   criticalHitChance: 0.1
   CriticalHitMultiplier: 1.25
   criticalHitParticle: {fileID: 198355666768585268}
-  abilities:
-  - {fileID: 11400000, guid: e98d3962eaaf21c4ba4ca7de53d5c01c, type: 2}
-  - {fileID: 11400000, guid: 4a092c9c21a7b4149b8b7dc35c16372e, type: 2}
-  - {fileID: 11400000, guid: 8229ddc7761bce043b77a945132ee729, type: 2}
+--- !u!114 &114264273734085368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48637e014b3218f49a9eff667752c12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  healthBar: {fileID: 0}
+  damageSounds: []
+  deathSounds: []
+  deathVanishSeconds: 2
+  currentHealthPoints: 0
 --- !u!114 &114296987227934042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3488,25 +3501,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c4737a77be2c14bb641b66318b6538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyOrbImage: {fileID: 0}
+  abilities:
+  - {fileID: 11400000, guid: 4a092c9c21a7b4149b8b7dc35c16372e, type: 2}
+  - {fileID: 11400000, guid: 8229ddc7761bce043b77a945132ee729, type: 2}
+  energyBarImage: {fileID: 0}
   maxEnergyPoints: 100
   regenPointsPerSecond: 10
---- !u!114 &114899770813298784
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 149790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6366b16153b96a244a6c9944c9af2f5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealthPoints: 100
-  healthBar: {fileID: 0}
-  damageSounds: []
-  deathSounds: []
-  deathVanishSeconds: 2
 --- !u!137 &137020870884941896
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

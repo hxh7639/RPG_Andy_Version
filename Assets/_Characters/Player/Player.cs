@@ -35,7 +35,7 @@ namespace RPG.Characters
         CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
         GameObject weaponObject;
-
+        SpecialAbilities abilities;
 
 
 
@@ -44,9 +44,7 @@ namespace RPG.Characters
             RegisterForMouseClick();
             PutWeaponInHand(CurrentWeaponConfig);
             SetAttackAnimation();
-            AttachInitialAbilities();
-
-            abilities[0].AttachAbilityTo(gameObject);
+            abilities = GetComponent<SpecialAbilities>();
         }
 
         public void PutWeaponInHand(Weapon weaponToUse)
@@ -60,11 +58,6 @@ namespace RPG.Characters
             weaponObject.transform.localRotation = CurrentWeaponConfig.gripTransform.localRotation;
         }
 
-        private void AttachInitialAbilities()
-        {
-            for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
-            abilities[abilityIndex].AttachAbilityTo(gameObject);
-        }
 
         private void Update()
         {
@@ -77,11 +70,11 @@ namespace RPG.Characters
 
         private void ScanForAbilityKeyDown()
         {
-            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++) // starting at 1, loop through the total abilities created
+            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++) // starting at 1, loop through the total abilities created
             {
                 if (Input.GetKeyDown(keyIndex.ToString()))
                 {
-                    AttempSpecialAbility(keyIndex);
+                    abilities.AttempSpecialAbility(keyIndex);
                 }
             }
         }
@@ -109,23 +102,8 @@ namespace RPG.Characters
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                AttempSpecialAbility(0);
+                abilities.AttempSpecialAbility(0);
             }
-        }
-
-        private void AttempSpecialAbility(int abilityIndex)
-        {
-            var energyComponent = GetComponent<SpecialAbilities>();
-            var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
-
-            if (energyComponent.IsEnergyAvailable(energyCost))
-            {
-                energyComponent.ConsumeEnergy(energyCost);
-                var abilityParams = new AbilityUseParams(enemy, baseDamage);
-                abilities[abilityIndex].Use(abilityParams);
-                // TODO Use the ability
-            }
-
         }
 
         private void AttackTarget()

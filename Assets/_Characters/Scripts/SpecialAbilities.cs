@@ -27,6 +27,7 @@ namespace RPG.Characters
         {
             audioSource = GetComponent<AudioSource>();
             currentEnergyPoints = maxEnergyPoints;
+            AttachInitialAbilities();
             UpdateEnergyBar();
         }
 
@@ -39,16 +40,40 @@ namespace RPG.Characters
             }
         }
 
+        void AttachInitialAbilities()
+        {
+            for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
+                abilities[abilityIndex].AttachAbilityTo(gameObject);
+        }
+
+        public void AttempSpecialAbility(int abilityIndex)
+        {
+            var energyComponent = GetComponent<SpecialAbilities>();
+            var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
+
+            if (energyCost <= currentEnergyPoints)
+            {
+                ConsumeEnergy(energyCost);
+                print("Using special ability " + abilityIndex); // TODO make it work
+            }
+            else
+            {
+                //TODO Play out of energy sound
+            }
+
+        }
+
+        public int GetNumberOfAbilities()
+        {
+            return abilities.Length;
+        }
+
         private void AddEnergyPoint()
         {
             var pointsToAdd = regenPointsPerSecond * Time.deltaTime;  // multiply Time.deltaTime to make things happen per second instead of per frame.
             currentEnergyPoints = Mathf.Clamp(currentEnergyPoints + pointsToAdd, 0, maxEnergyPoints); // if you don't clamp it it may go above MAX if regends too fast.
         }
 
-        public bool IsEnergyAvailable(float amount)
-        {
-            return amount <= currentEnergyPoints;
-        }
 
         public void ConsumeEnergy(float amount)
         {
@@ -59,7 +84,7 @@ namespace RPG.Characters
 
         private void UpdateEnergyBar()
         {
-            energyBarImage.fillAmount = energyAsPercentage();
+            energyBarImage.fillAmount = energyAsPercentage;
         }
 
 
