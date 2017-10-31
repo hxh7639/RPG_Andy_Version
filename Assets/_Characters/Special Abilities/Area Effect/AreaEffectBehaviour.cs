@@ -7,16 +7,16 @@ using System;
 
 public class AreaEffectBehaviour : AbilityBehaviour
 {
-    public override void Use(AbilityUseParams useParams)
+    public override void Use(GameObject target)
     {
         PlayAbilitySound();
-        DealRadialDamage(useParams);
+        DealRadialDamage();
         PlayParticleEffect();
     }
 
 
 
-    private void DealRadialDamage(AbilityUseParams useParams)
+    private void DealRadialDamage()
     {
          // Static sphere cast for targets
         RaycastHit[] hits = Physics.SphereCastAll(
@@ -29,12 +29,12 @@ public class AreaEffectBehaviour : AbilityBehaviour
         // for each hit
         foreach (RaycastHit hit in hits)
         {
-            var damageable = hit.collider.gameObject.GetComponent<IDamageable>(); // see if the hit object has an IDamageable component
+            var damageable = hit.collider.gameObject.GetComponent<HealthSystem>(); // see if the hit object has an HealthSystem component
             bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
             if (damageable != null && !hitPlayer)
             {
                 // deal damage to target + player base damage
-                float damageToDeal = useParams.baseDamage + (config as AreaEffectConfig).GetDamageToEachTarget(); // AOE damage calulation
+                float damageToDeal = (config as AreaEffectConfig).GetDamageToEachTarget(); // AOE damage calulation
                 damageable.TakDamage(damageToDeal);  // different ways to take damage, different from PowerAttackBehaviour script
             }
         }

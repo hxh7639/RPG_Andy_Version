@@ -36,18 +36,20 @@ namespace RPG.Characters
             var layerCollidedWith = collision.gameObject.layer;
             if (shooter && layerCollidedWith != shooter.layer) //TODO Bug to be fixed later in course (my thought is to move coolidedwith shooter layer to the damageable area and exclude it with the if statement.
             {
-                DamageDamageable(collision);
+                // DamageDamageable(collision);
             }
         }
 
-        private void DamageDamageable(Collision collision)
-        {
-            Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
-            if (damageableComponent)
-            {
-                (damageableComponent as IDamageable).TakDamage(damageCaused);
-            }
-            Destroy(gameObject, DESTORY_DELAY);
-        }
+        //TODO reimpliment
+
+        //private void DamageDamageable(Collision collision)
+        //{
+        //    Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
+        //    if (damageableComponent)
+        //    {
+        //        (damageableComponent as IDamageable).TakDamage(damageCaused);
+        //    }
+        //    Destroy(gameObject, DESTORY_DELAY);
+        //}
     }
 }
