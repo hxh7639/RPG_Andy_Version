@@ -14,7 +14,7 @@ namespace RPG.Characters
         [SerializeField] Image energyBarImage;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 1f;
-        // TODO add outOfEnergy (sound);
+        [SerializeField] AudioClip outOfEnergy;
 
         float currentEnergyPoints;
         AudioSource audioSource;
@@ -46,19 +46,19 @@ namespace RPG.Characters
                 abilities[abilityIndex].AttachAbilityTo(gameObject);
         }
 
-        public void AttempSpecialAbility(int abilityIndex)
+        public void AttempSpecialAbility(int abilityIndex, GameObject target = null) // by setting target = null, the whole arguement becomes optional.
         {
             var energyComponent = GetComponent<SpecialAbilities>();
-            var energyCost = abilities[abilityIndex].GetEnergyCost();  // to make it read from scripttible object
+            var energyCost = abilities[abilityIndex].GetEnergyCost();  // reads from scripttible object
 
             if (energyCost <= currentEnergyPoints)
             {
                 ConsumeEnergy(energyCost);
-                print("Using special ability " + abilityIndex); // TODO make it work
+                abilities[abilityIndex].Use(target); // because the target is set to null, it will only call the target if there is one. otherwise it will just call nothing and still cast abilities.
             }
             else
             {
-                //TODO Play out of energy sound
+                audioSource.PlayOneShot(outOfEnergy); // always audioSource.playOneShot but put the audio you want to play in ()
             }
 
         }
