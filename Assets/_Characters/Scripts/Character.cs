@@ -6,9 +6,17 @@ using RPG.CameraUI;
 
 namespace RPG.Characters
 {
+    [SelectionBase]
     [RequireComponent(typeof(NavMeshAgent))]
-    public class CharacterMovement : MonoBehaviour
+    public class Character : MonoBehaviour
     {
+        [Header("Setup Settings")]  // pick what you want to use, it will assign to it during run time
+        [SerializeField] RuntimeAnimatorController animatorController;
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
+        [SerializeField] Avatar characterAvatar;
+
+
+        [Header("Movement Properties")]
         [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = 0.7f;
         [SerializeField] float movingTurnSpeed = 360;
@@ -25,13 +33,23 @@ namespace RPG.Characters
         float turnAmount;
         float forwardAmount;
 
+        void Awake()
+        {
+            AddRequiredComponents();
+        }
+
+        private void AddRequiredComponents()
+        {
+            animator = gameObject.AddComponent<Animator>();
+            animator.runtimeAnimatorController = animatorController;
+            animator.avatar = characterAvatar;
+        }
 
         void Start()
         {
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
 
 
-            animator = GetComponent<Animator>();
             animator.applyRootMotion = true;  //TODO  consider if needed
 
             rigidBody = GetComponent<Rigidbody>();
