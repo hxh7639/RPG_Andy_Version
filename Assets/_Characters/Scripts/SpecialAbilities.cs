@@ -58,7 +58,9 @@ namespace RPG.Characters
             }
             else
             {
-                audioSource.PlayOneShot(outOfEnergy); // always audioSource.playOneShot but put the audio you want to play in ()
+                audioSource.clip = outOfEnergy;
+                audioSource.Play();
+                // lecture uses audioSource.PlayOneShot(outOfEnergy); // always audioSource.playOneShot but put the audio you want to play in ()
             }
 
         }
