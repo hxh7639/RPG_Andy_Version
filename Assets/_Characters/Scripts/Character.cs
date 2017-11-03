@@ -10,6 +10,12 @@ namespace RPG.Characters
     [RequireComponent(typeof(NavMeshAgent))]
     public class Character : MonoBehaviour
     {
+        [Header("Capsule Collider Settings")]
+        [SerializeField] Vector3 colliderCenter = new Vector3(0, 0.8f, 0);
+        [SerializeField] float colliderRadius = 0.3f;
+        [SerializeField] float colliderHeight = 1.88f;
+
+
         [Header("Setup Settings")]  // pick what you want to use, it will assign to it during run time
         [SerializeField] RuntimeAnimatorController animatorController;
         [SerializeField] AnimatorOverrideController animatorOverrideController;
@@ -40,6 +46,11 @@ namespace RPG.Characters
 
         private void AddRequiredComponents()
         {
+            var capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
+            capsuleCollider.radius = colliderRadius;
+            capsuleCollider.height = colliderHeight;
+            capsuleCollider.center = colliderCenter;
+
             animator = gameObject.AddComponent<Animator>();
             animator.runtimeAnimatorController = animatorController;
             animator.avatar = characterAvatar;
