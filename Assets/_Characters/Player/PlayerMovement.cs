@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using RPG.CameraUI;  // for mouse events
 using UnityEngine.Assertions;
-// TODO consider re-wiring, don't want Player script to be affected by CameraUI, core,and weapons
-using RPG.CameraUI; 
-using RPG.Core; 
-using UnityEngine.SceneManagement;
 
+
+
+// TODO remove weapon system
 namespace RPG.Characters
 {
-    public class Player : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
 
 
@@ -30,6 +28,7 @@ namespace RPG.Characters
 
 
         Enemy enemy = null;
+        Character character;
         Animator animator = null;
         float currentHealthPoints = 0;
         CameraRaycaster cameraRaycaster = null;
@@ -41,31 +40,27 @@ namespace RPG.Characters
 
         void Start()
         {
-            RegisterForMouseClick();
-            PutWeaponInHand(CurrentWeaponConfig);
-            SetAttackAnimation();
+            character = GetComponent<Character>();
+
+            RegisterForMouseEvent();
+            PutWeaponInHand(CurrentWeaponConfig);  //todo move to WaponSystem
+            SetAttackAnimation(); //todo move to WaponSystem
             abilities = GetComponent<SpecialAbilities>();
         }
 
-        public void PutWeaponInHand(Weapon weaponToUse)
+        private void RegisterForMouseEvent()
         {
-            CurrentWeaponConfig = weaponToUse;
-            var weaponPrefab = weaponToUse.GetWeaponPrefab();
-            GameObject mainHand = RequestMainHand();
-            Destroy(weaponObject); //empty out player hands
-            weaponObject = Instantiate(weaponPrefab, mainHand.transform);
-            weaponObject.transform.localPosition = CurrentWeaponConfig.gripTransform.localPosition;
-            weaponObject.transform.localRotation = CurrentWeaponConfig.gripTransform.localRotation;
+            cameraRaycaster = FindObjectOfType<CameraRaycaster>();
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy; // adding OnMouseOverEnemy to event list for observing onMouseOverEnemy
+            cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+
         }
+
 
 
         private void Update()
         {
-            var healthPercentage = GetComponent<HealthSystem>().healthAsPercentage;
-            if (healthPercentage > Mathf.Epsilon) // 
-            {
                 ScanForAbilityKeyDown();
-            }
         }
 
         private void ScanForAbilityKeyDown()
@@ -79,20 +74,37 @@ namespace RPG.Characters
             }
         }
 
-        private void SetAttackAnimation() 
+        void OnMouseOverPotentiallyWalkable(Vector3 destination)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                character.SetDestination(destination);
+            }
+        }
+
+        private void SetAttackAnimation()      // TODO move to WeaponSystem
         {
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
             animatorOverrideController[DEFAULT_ATTACK] = CurrentWeaponConfig.GetAttackAnimClip();
         }
 
-        private void RegisterForMouseClick()
-        {
-            cameraRaycaster = FindObjectOfType<CameraRaycaster>();
-            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy; // adding OnMouseOverEnemy to event list for observing onMouseOverEnemy
 
+
+        // TODO move to WeaponSystem
+        public void PutWeaponInHand(Weapon weaponToUse)
+        {
+            CurrentWeaponConfig = weaponToUse;
+            var weaponPrefab = weaponToUse.GetWeaponPrefab();
+            GameObject mainHand = RequestMainHand();
+            Destroy(weaponObject); //empty out player hands
+            weaponObject = Instantiate(weaponPrefab, mainHand.transform);
+            weaponObject.transform.localPosition = CurrentWeaponConfig.gripTransform.localPosition;
+            weaponObject.transform.localRotation = CurrentWeaponConfig.gripTransform.localRotation;
         }
 
+
+        // TODO make it better
         void OnMouseOverEnemy(Enemy enemyToSet) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
         {
             this.enemy = enemyToSet;
@@ -106,6 +118,8 @@ namespace RPG.Characters
             }
         }
 
+
+        //TODO use co-routines for move and attack
         private void AttackTarget()
         {
             if (Time.time - lastHitTime > CurrentWeaponConfig.GetMinTimeBetweenHits())
@@ -116,6 +130,7 @@ namespace RPG.Characters
             }
         }
 
+        // TODO move to WeaponSystem
         private float CalculateDamage()
         {
 
@@ -132,14 +147,14 @@ namespace RPG.Characters
             }
         }
 
-        private bool IsTargetInRange(GameObject target)
+        bool IsTargetInRange(GameObject target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= CurrentWeaponConfig.GetMaxAttackRange();
         }
 
 
-        private GameObject RequestMainHand()  // find main hand
+        private GameObject RequestMainHand()  // find main hand      // TODO move to WeaponSystem
         {
             var mainHands = GetComponentsInChildren<MainHand>();
             int numberOfMainHands = mainHands.Length;

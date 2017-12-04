@@ -30,7 +30,7 @@ public class AreaEffectBehaviour : AbilityBehaviour
         foreach (RaycastHit hit in hits)
         {
             var damageable = hit.collider.gameObject.GetComponent<HealthSystem>(); // see if the hit object has an HealthSystem component
-            bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+            bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerMovement>();
             if (damageable != null && !hitPlayer)
             {
                 // deal damage to target + player base damage
