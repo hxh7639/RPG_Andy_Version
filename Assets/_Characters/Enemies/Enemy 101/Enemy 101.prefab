@@ -653,6 +653,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4417881302522996}
   - component: {fileID: 114443229180935752}
+  - component: {fileID: 114517294348633594}
+  - component: {fileID: 114275818632723596}
   m_Layer: 0
   m_Name: Enemy 101
   m_TagString: Untagged
@@ -1645,6 +1647,20 @@ Transform:
   m_Father: {fileID: 4765204091070782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114275818632723596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695384290837512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e566c345e4b12844baad6b3a5530d60c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 11
+  CurrentWeaponConfig: {fileID: 11400000, guid: effc0f857ecfa4e43a895fb53139215c,
+    type: 2}
 --- !u!114 &114443229180935752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1661,9 +1677,9 @@ MonoBehaviour:
     type: 2}
   characterAvatar: {fileID: 9000000, guid: 7c72ed3f90575084c9f3b5b585887182, type: 3}
   audioSourceSpatialBlend: 0.5
-  colliderCenter: {x: 0, y: 0.8, z: 0}
-  colliderRadius: 0.3
-  colliderHeight: 1.88
+  colliderCenter: {x: 0, y: 1, z: 0}
+  colliderRadius: 0.4
+  colliderHeight: 2.5
   stoppingDistance: 1
   moveSpeedMultiplier: 0.7
   movingTurnSpeed: 360
@@ -1672,6 +1688,18 @@ MonoBehaviour:
   animationSpeedMultiplier: 1.5
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1.5
+--- !u!114 &114517294348633594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1695384290837512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8ff6ce87c42e5408f8cc90eb401895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRadius: 15
 --- !u!114 &114782249756204456
 MonoBehaviour:
   m_ObjectHideFlags: 1

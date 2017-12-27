@@ -17,7 +17,7 @@ namespace RPG.CameraUI
 
         Rect currentScreenRect = new Rect();
 
-        public delegate void OnMouseOverEnemy(Enemy enemy);
+        public delegate void OnMouseOverEnemy(EnemyAI enemy);
         public event OnMouseOverEnemy onMouseOverEnemy;
 
         public delegate void OnMouseOverTerrian(Vector3 destination);
@@ -56,7 +56,7 @@ namespace RPG.CameraUI
             RaycastHit hitInfo;
             Physics.Raycast(ray, out hitInfo, maxRaycastDepth);
             var gameObjectHit = hitInfo.collider.gameObject; // looking at hitinfo and returns the gameObject it hits
-            var enemyHit = gameObjectHit.GetComponent<Enemy>(); // enemyHit is the object hit with "Enemy" component on it
+            var enemyHit = gameObjectHit.GetComponent<EnemyAI>(); // enemyHit is the object hit with "Enemy" component on it
             if (enemyHit) // if there is such thing (object hit with an "Enemy" component on it, do this
             {
                 Cursor.SetCursor(enemyCursor, cursorHotspot, CursorMode.Auto); // change mouse cursor

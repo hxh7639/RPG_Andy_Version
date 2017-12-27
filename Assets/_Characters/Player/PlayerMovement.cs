@@ -3,9 +3,6 @@ using UnityEngine;
 using RPG.CameraUI;  // for mouse events
 
 
-
-
-// TODO remove weapon system
 namespace RPG.Characters
 {
     public class PlayerMovement : MonoBehaviour
@@ -16,7 +13,7 @@ namespace RPG.Characters
         
 
 
-        Enemy enemy = null;
+        EnemyAI enemy = null;
         Character character;
         float currentHealthPoints = 0;
         CameraRaycaster cameraRaycaster = null;
@@ -68,7 +65,7 @@ namespace RPG.Characters
         }
         
         // TODO make it better
-        void OnMouseOverEnemy(Enemy enemyToSet) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
+        void OnMouseOverEnemy(EnemyAI enemyToSet) // observing onMouseOverEnemy, when it happenes it passes (Enemy enemy) to this method
         {
             this.enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject)) // enemy.gameobject selects the parent gameObject for the enemy script
