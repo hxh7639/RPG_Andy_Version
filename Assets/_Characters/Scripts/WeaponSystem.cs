@@ -35,7 +35,6 @@ namespace RPG.Characters
             bool targetIsDead;
             bool targetIsOutOfRange;
 
-
             if (target == null)
             {
                 targetIsDead = false;
@@ -44,7 +43,7 @@ namespace RPG.Characters
             else
             {
                 // test if target is dead
-                var targetHealth = GetComponent<HealthSystem>().healthAsPercentage;
+                var targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
                 targetIsDead = (targetHealth <= Mathf.Epsilon);
                 // test if target is out of range
                 var distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
