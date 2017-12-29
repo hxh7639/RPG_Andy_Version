@@ -10,6 +10,8 @@ namespace RPG.Characters
         {
             DealDamage(target);
             PlayParticleEffect();
+            transform.LookAt(target.transform); // added by andy
+            PlayAbilityAnimation();
         }
 
 
