@@ -25,12 +25,12 @@ namespace RPG.Characters
         [SerializeField] float colliderHeight = 1.88f;
         
         [Header("Movement")]
-        [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = 0.7f;
+        [SerializeField] float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
-        [SerializeField] float animationSpeedMultiplier = 1.5f;
+
 
         [Header("Nav Mesh Agent")]
         [SerializeField] float navMeshAgentSteeringSpeed = 1.0f;
@@ -118,7 +118,6 @@ namespace RPG.Characters
         }
 
 
-
         void SetForwardAndTurn(Vector3 movement)
         {
             // convert the world relative moveInput vector into a local-relative
@@ -137,9 +136,7 @@ namespace RPG.Characters
             animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
             animator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
             animator.speed = animationSpeedMultiplier;
-
         }
-
 
         void ApplyExtraTurnRotation()
         {
@@ -147,7 +144,6 @@ namespace RPG.Characters
             float turnSpeed = Mathf.Lerp(stationaryTurnSpeed, movingTurnSpeed, forwardAmount);
             transform.Rotate(0, turnAmount * turnSpeed * Time.deltaTime, 0);
         }
-
 
         void OnAnimatorMove()
         {

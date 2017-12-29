@@ -3318,10 +3318,10 @@ MonoBehaviour:
   colliderHeight: 1.88
   stoppingDistance: 1
   moveSpeedMultiplier: 0.7
-  movingTurnSpeed: 500
-  stationaryTurnSpeed: 500
-  moveThreshold: 1
   animationSpeedMultiplier: 1.5
+  movingTurnSpeed: 800
+  stationaryTurnSpeed: 300
+  moveThreshold: 1
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1.5
 --- !u!114 &114013185415488784
