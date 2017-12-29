@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e91bf6fa7b649b458bc977a663acb47, type: 3}
-  m_Name: Hoe
+  m_Name: Cleaver
   m_EditorClassIdentifier: 
-  gripTransform: {fileID: 4288030278253028, guid: d52aa7860c0687942b4a52671591d667,
+  gripTransform: {fileID: 4996375126733992, guid: 574f8966c91df6c4f8fb686b09ee425a,
     type: 2}
-  WeaponPrefab: {fileID: 1274797246840802, guid: cc0dbe33ee8adbe4eb124e2d95d37fe4,
+  WeaponPrefab: {fileID: 1109168940927434, guid: de51ee8ef7dd8db4984b85b74758db1c,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: 97dec6fa5304355458b6e8e35936d880, type: 3}
+  attackAnimation: {fileID: 7400000, guid: 9e5d42c64f4181e4e92729d62fa2d0fd, type: 3}
   minTimeBetweenHits: 0.5
   maxAttackRange: 2
   additionalDamage: 10
-  damageDelay: 2
+  damageDelay: 0.5

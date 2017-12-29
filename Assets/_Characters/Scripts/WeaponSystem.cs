@@ -9,7 +9,6 @@ namespace RPG.Characters
     {
         [SerializeField] float baseDamage = 11f;
         [SerializeField] WeaponConfig CurrentWeaponConfig = null;
-
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
@@ -140,7 +139,7 @@ namespace RPG.Characters
         {
             transform.LookAt(target.transform);
             animator.SetTrigger(ATTACK_TRIGGER);
-            float damageDelay = 1.0f;  // TODO get from the weapon
+            float damageDelay = CurrentWeaponConfig.GetDamageDelay();
             SetAttackAnimation();
             StartCoroutine(DamageAfterDelay(damageDelay));
         }
