@@ -47,7 +47,7 @@ namespace RPG.Characters
 
         void OnTriggerEnter()
         {
-            FindObjectOfType<WeaponSystem>().PutWeaponInHand(weaponConfig);
+            FindObjectOfType<WeaponSystem>().PutWeaponInHand(weaponConfig);  // andy. using findobject of type will cause the weapon to be put into random hands
             audioSource.PlayOneShot(pickUpSFX);
         }
     }

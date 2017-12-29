@@ -67,7 +67,7 @@ namespace RPG.Characters
 
         public void Heal(float points)
         {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
+                currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
         }
 
         IEnumerator KillCharacter()

@@ -40,7 +40,7 @@ namespace RPG.Characters
             }
         }
 
-        //TODO reimpliment
+        //TODO reimpliment projectile
 
         //private void DamageDamageable(Collision collision)
         //{

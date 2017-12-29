@@ -86,8 +86,8 @@ namespace RPG.Characters
         
         IEnumerator MoveToTarget(GameObject target)
         {
-            character.SetDestination(target.transform.position);
-            while (!IsTargetInRange(gameObject))
+            character.SetDestination(target.transform.position);  // andy, target's position should be updated in real time.
+            while (!IsTargetInRange(target))
             {
                 yield return new WaitForEndOfFrame();
             }

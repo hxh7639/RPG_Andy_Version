@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 114013185415488784}
   - component: {fileID: 114770427358389886}
   - component: {fileID: 114318551840087888}
+  - component: {fileID: 114123037777215000}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -690,6 +691,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4151942600173920}
+  - component: {fileID: 114775992294301742}
   m_Layer: 11
   m_Name: locator1
   m_TagString: Untagged
@@ -735,7 +737,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4804858767622940}
-  - component: {fileID: 114296987227934042}
   m_Layer: 11
   m_Name: Wrist_R
   m_TagString: Untagged
@@ -3334,25 +3335,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60237bdc7b1af84daad5a2ca24abd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 50
-  CurrentWeaponConfig: {fileID: 11400000, guid: d967bb14a5acc9847b553db5a4aad6b6,
-    type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: ace0150b1b58c754d9b56f1db756e8c4,
-    type: 2}
-  criticalHitChance: 0.1
-  CriticalHitMultiplier: 1.25
-  criticalHitParticle: {fileID: 198355666768585268}
---- !u!114 &114296987227934042
+--- !u!114 &114123037777215000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1481870002484856}
+  m_GameObject: {fileID: 149790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02848579df0641a47a48b58b15e7fc1a, type: 3}
+  m_Script: {fileID: 11500000, guid: e566c345e4b12844baad6b3a5530d60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 11
+  CurrentWeaponConfig: {fileID: 11400000, guid: effc0f857ecfa4e43a895fb53139215c,
+    type: 2}
 --- !u!114 &114318551840087888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3366,8 +3362,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 0}
-  damageSounds: []
-  deathSounds: []
+  damageSounds:
+  - {fileID: 8300000, guid: 906a50fbae1a335409041892f8a585ff, type: 3}
+  - {fileID: 8300000, guid: c73c0b6705447be4aa9daacf00d7b90c, type: 3}
+  - {fileID: 8300000, guid: 436bca2656257a54ab9646eceb235611, type: 3}
+  - {fileID: 8300000, guid: 6b2655d202c4fa84aab6b35c5e7de8f6, type: 3}
+  - {fileID: 8300000, guid: 0786a951244ef9446b8197290b0dfd78, type: 3}
+  - {fileID: 8300000, guid: 64cdfe686e8bf4c4088b19235716b644, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: dfad078225879b0409225c7cb52dd1db, type: 3}
+  - {fileID: 8300000, guid: 3f59766cee64e2b40ac48eb905dcb4aa, type: 3}
+  - {fileID: 8300000, guid: b98da68333345c94a874f75c8dcbae84, type: 3}
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!114 &114770427358389886
@@ -3382,13 +3387,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 11400000, guid: 47f17b63d72da2e458ccfd2f721b8805, type: 2}
+  - {fileID: 11400000, guid: e98d3962eaaf21c4ba4ca7de53d5c01c, type: 2}
   - {fileID: 11400000, guid: 4a092c9c21a7b4149b8b7dc35c16372e, type: 2}
   - {fileID: 11400000, guid: 8229ddc7761bce043b77a945132ee729, type: 2}
   energyBarImage: {fileID: 0}
   maxEnergyPoints: 100
   regenPointsPerSecond: 10
   outOfEnergy: {fileID: 8300000, guid: 1658a7fa9d4ed4542af546b13dc60897, type: 3}
+--- !u!114 &114775992294301742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452560506266792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02848579df0641a47a48b58b15e7fc1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137020870884941896
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

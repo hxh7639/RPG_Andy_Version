@@ -14,6 +14,7 @@ namespace RPG.Characters
         [SerializeField] float chaseRadius = 5f;
         [SerializeField] WaypointContainer patrolPath;
         [SerializeField] float waypointTolerance = 2.0f;
+        [SerializeField] float waypointDwellTime = 1.0f;
 
         PlayerControl player = null;
         Character character;
@@ -39,17 +40,19 @@ namespace RPG.Characters
             if (distanceToPlayer > chaseRadius && state != State.patrolling)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
             if (distanceToPlayer <= chaseRadius && state!= State.chasing)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
-            if (distanceToPlayer <= currentWeaponRange && state != State.attacking)
+            if (distanceToPlayer < currentWeaponRange && state != State.attacking)
             {
                 StopAllCoroutines();
-                state = State.attacking;
+                weaponSystem.AttackTarget(player.gameObject);
             }
 
         }
@@ -66,9 +69,8 @@ namespace RPG.Characters
                 CycleWaypointWhenClose(nextWaypointPos);
                 // cycle waypoint close
                 // wait at a waypoint
-                yield return new WaitForSeconds(0.5f); // TODO parameterise
+                yield return new WaitForSeconds(waypointDwellTime);
             }
-
         }
 
         private void CycleWaypointWhenClose(Vector3 nextWaypointPos)
@@ -87,9 +89,7 @@ namespace RPG.Characters
                 character.SetDestination(player.transform.position);
                 yield return new WaitForEndOfFrame();
             }
-
         }
-
 
         //changed the way projectile works in RPG 161 simplifying enemy to enemyAI
 

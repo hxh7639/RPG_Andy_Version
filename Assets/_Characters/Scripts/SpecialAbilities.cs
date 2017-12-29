@@ -50,17 +50,22 @@ namespace RPG.Characters
         {
             var energyComponent = GetComponent<SpecialAbilities>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();  // reads from scripttible object
+            float playerHealth = GetComponent<HealthSystem>().currentHealthPoints; // added by andy
 
-            if (energyCost <= currentEnergyPoints)
+            if (energyCost <= currentEnergyPoints && playerHealth > 0) // 2nd part added by andy
             {
                 ConsumeEnergy(energyCost);
                 abilities[abilityIndex].Use(target); // because the target is set to null, it will only call the target if there is one. otherwise it will just call nothing and still cast abilities.
             }
-            else
+            else if (playerHealth > 0)
             {
                 audioSource.clip = outOfEnergy;
                 audioSource.Play();
                 // lecture uses audioSource.PlayOneShot(outOfEnergy); // always audioSource.playOneShot but put the audio you want to play in ()
+            }
+            else
+            {
+                return;
             }
 
         }

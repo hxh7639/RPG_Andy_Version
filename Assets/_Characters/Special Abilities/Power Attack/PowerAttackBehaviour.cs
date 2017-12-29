@@ -8,6 +8,7 @@ namespace RPG.Characters
     {
         public override void Use(GameObject target)
         {
+            PlayAbilitySound();
             DealDamage(target);
             PlayParticleEffect();
             transform.LookAt(target.transform); // added by andy
@@ -16,8 +17,7 @@ namespace RPG.Characters
 
 
         private void DealDamage(GameObject target)
-        {
-            PlayAbilitySound();
+        {            
             float damageToDeal = (config as PowerAttackConfig).GetExtraDamage();
             target.GetComponent<HealthSystem>().TakDamage(damageToDeal); // if there is a healthsystem, it is damageable.  lecture 153. Eliminate A Struct And Interface
         }
