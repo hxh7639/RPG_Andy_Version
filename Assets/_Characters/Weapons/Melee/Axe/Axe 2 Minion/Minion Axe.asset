@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e91bf6fa7b649b458bc977a663acb47, type: 3}
+  m_Name: Minion Axe
+  m_EditorClassIdentifier: 
+  gripTransform: {fileID: 4278117618060182, guid: 42133a9b6117c88419d2440ea4ee3728,
+    type: 2}
+  WeaponPrefab: {fileID: 1668751681927596, guid: e9053c9d54bce774481526eb3016cd28,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 58f2909dff975b54c8395d479180996e, type: 3}
+  minTimeBetweenHits: 0.3
+  maxAttackRange: 2.5
+  additionalDamage: 0
+  damageDelay: 0.5
