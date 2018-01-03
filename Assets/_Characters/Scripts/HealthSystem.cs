@@ -87,6 +87,8 @@ namespace RPG.Characters
             }
             else // assume is enemy for now, reconsider on other NPCs
             {
+                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+                audioSource.Play();
                 DestroyObject(gameObject, deathVanishSeconds);
             }
 

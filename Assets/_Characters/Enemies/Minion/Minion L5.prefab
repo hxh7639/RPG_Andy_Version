@@ -1577,16 +1577,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1745836967167836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6366b16153b96a244a6c9944c9af2f5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 48637e014b3218f49a9eff667752c12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 48
+  maxHealthPoints: 100
   healthBar: {fileID: 114492076127794602}
-  damageSounds:
-  - {fileID: 8300000, guid: 599f0c12f665d1e459f0c951ac05a9a4, type: 3}
-  - {fileID: 8300000, guid: ef0ebeccb535fb341b950200f6f249ef, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: 2221f93f677ea074baa6bca97f62b2b1, type: 3}
+  damageSounds: []
+  deathSounds: []
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!114 &114836989159778046

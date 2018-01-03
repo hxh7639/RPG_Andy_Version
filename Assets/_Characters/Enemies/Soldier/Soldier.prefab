@@ -2386,12 +2386,11 @@ MonoBehaviour:
   colliderCenter: {x: 0.05, y: 0.8, z: 0}
   colliderRadius: 0.25
   colliderHeight: 1.7
-  stoppingDistance: 1
   moveSpeedMultiplier: 0.7
+  animationSpeedMultiplier: 1.5
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
-  animationSpeedMultiplier: 1.5
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1.5
 --- !u!114 &114517294348633594
@@ -2428,22 +2427,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695384290837512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6366b16153b96a244a6c9944c9af2f5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 48637e014b3218f49a9eff667752c12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 114086238156478106}
-  damageSounds:
-  - {fileID: 8300000, guid: 906a50fbae1a335409041892f8a585ff, type: 3}
-  - {fileID: 8300000, guid: c73c0b6705447be4aa9daacf00d7b90c, type: 3}
-  - {fileID: 8300000, guid: 436bca2656257a54ab9646eceb235611, type: 3}
-  - {fileID: 8300000, guid: 6b2655d202c4fa84aab6b35c5e7de8f6, type: 3}
-  - {fileID: 8300000, guid: 0786a951244ef9446b8197290b0dfd78, type: 3}
-  - {fileID: 8300000, guid: 64cdfe686e8bf4c4088b19235716b644, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: dfad078225879b0409225c7cb52dd1db, type: 3}
-  - {fileID: 8300000, guid: 3f59766cee64e2b40ac48eb905dcb4aa, type: 3}
-  - {fileID: 8300000, guid: b98da68333345c94a874f75c8dcbae84, type: 3}
+  damageSounds: []
+  deathSounds: []
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!137 &137338797791670150
