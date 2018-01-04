@@ -761,10 +761,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4417881302522996}
+  - component: {fileID: 114769889364320348}
   - component: {fileID: 114443229180935752}
   - component: {fileID: 114517294348633594}
   - component: {fileID: 114275818632723596}
-  - component: {fileID: 114769889364320348}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -2432,8 +2432,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 114086238156478106}
-  damageSounds: []
-  deathSounds: []
+  damageSounds:
+  - {fileID: 8300000, guid: 2221f93f677ea074baa6bca97f62b2b1, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d9b6350ee08128c48b5724e5c9c3bae4, type: 3}
+  - {fileID: 8300000, guid: 0186ef302f2e9cb4a910996e076fe6d3, type: 3}
+  - {fileID: 8300000, guid: 5b29baa3b28802845b1ee1e749f01e7a, type: 3}
+  - {fileID: 8300000, guid: 2db374b0125381a419e1274e2f3a827c, type: 3}
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!137 &137338797791670150

@@ -4687,10 +4687,15 @@ MonoBehaviour:
   maxHealthPoints: 100
   healthBar: {fileID: 114662850288199738}
   damageSounds:
-  - {fileID: 8300000, guid: 2221f93f677ea074baa6bca97f62b2b1, type: 3}
-  - {fileID: 8300000, guid: 599f0c12f665d1e459f0c951ac05a9a4, type: 3}
+  - {fileID: 8300000, guid: 2f458bc1a55dbcb4eb6fd9d0d0141a63, type: 3}
+  - {fileID: 8300000, guid: 6feff466ef0064f49b61d46d7028b8c0, type: 3}
+  - {fileID: 8300000, guid: 6742aba569e3f0e41a5fe51ed832aee3, type: 3}
+  - {fileID: 8300000, guid: 7ba744dee74a71640b5c183a43661bc9, type: 3}
   deathSounds:
-  - {fileID: 8300000, guid: 6ec248393fd1f7b4c8cddd497e659ffa, type: 3}
+  - {fileID: 8300000, guid: 6bddd487feede644890d2f30416823bf, type: 3}
+  - {fileID: 8300000, guid: 0d062b7babc4067419b6316d4c42cb1e, type: 3}
+  - {fileID: 8300000, guid: e9b5cfcbde40c9244ab358ed25f4a8e3, type: 3}
+  - {fileID: 8300000, guid: e02c521ef5f7ffe4c9ca668e4701816b, type: 3}
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!137 &137000010907697414
