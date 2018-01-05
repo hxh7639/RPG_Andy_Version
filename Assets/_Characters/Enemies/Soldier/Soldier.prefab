@@ -2404,7 +2404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8ff6ce87c42e5408f8cc90eb401895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRadius: 2.72
+  chaseRadius: 4
   patrolPath: {fileID: 0}
   waypointTolerance: 2
   waypointDwellTime: 1

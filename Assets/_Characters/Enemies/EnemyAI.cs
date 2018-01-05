@@ -37,21 +37,28 @@ namespace RPG.Characters
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
-            if (distanceToPlayer > chaseRadius && state != State.patrolling)
+
+            bool inWeaponRing = distanceToPlayer <= currentWeaponRange;
+            bool inChaseRing = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius;
+            bool OutsideChaseRing = distanceToPlayer > chaseRadius;
+
+
+            if (OutsideChaseRing)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
-            if (distanceToPlayer <= chaseRadius && state!= State.chasing)
+            if (inChaseRing)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
-            if (distanceToPlayer < currentWeaponRange && state != State.attacking)
+            if (inWeaponRing)
             {
                 StopAllCoroutines();
+                state = State.attacking;
                 weaponSystem.AttackTarget(player.gameObject);
             }
 
