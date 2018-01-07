@@ -4547,10 +4547,11 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: 59f7f57feddb4bd4dbadca12b207c6ce,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: 8bf4ca6f6f02d554e9cbb663d10ef7a4, type: 3}
+  animatorForwardCap: 1
   audioSourceSpatialBlend: 0.5
-  colliderCenter: {x: 0, y: 0.8, z: 0}
-  colliderRadius: 0.3
-  colliderHeight: 1.88
+  colliderCenter: {x: 0, y: 1, z: 0}
+  colliderRadius: 0.7
+  colliderHeight: 2
   moveSpeedMultiplier: 0.7
   animationSpeedMultiplier: 1.5
   movingTurnSpeed: 360
