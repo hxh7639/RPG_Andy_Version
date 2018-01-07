@@ -1661,8 +1661,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 114737985703927180}
-  damageSounds: []
-  deathSounds: []
+  damageSounds:
+  - {fileID: 8300000, guid: 6feff466ef0064f49b61d46d7028b8c0, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: e9b5cfcbde40c9244ab358ed25f4a8e3, type: 3}
   deathVanishSeconds: 2
   currentHealthPoints: 0
 --- !u!114 &114652966989450406
@@ -1728,10 +1730,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a8ff6ce87c42e5408f8cc90eb401895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRadius: 0.0001
+  chaseRadius: 2.3
   patrolPath: {fileID: 0}
   waypointTolerance: 2
-  waypointDwellTime: 1
+  waypointDwellTime: 0
 --- !u!114 &114823912493726230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1744,9 +1746,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: be1d14fbeddc7ef408d58199fbf77cb3, type: 3}
-  audioclipvolume: 0.5
-  layerFilter: 0
-  triggerRadius: 5
+  audioclipvolume: 1.5
+  layerFilter: 11
+  triggerRadius: 4
   isOneTimeOnly: 1
   hasPlayed: 0
 --- !u!114 &114902934101462592
@@ -1780,14 +1782,15 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: b9be0ab3564cca540ac81ada40c207e6,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: 7c72ed3f90575084c9f3b5b585887182, type: 3}
+  animatorForwardCap: 0.376
   audioSourceSpatialBlend: 0.5
   colliderCenter: {x: 0, y: 1.2, z: 0}
   colliderRadius: 0.5
   colliderHeight: 2.8
-  moveSpeedMultiplier: 0.7
-  animationSpeedMultiplier: 1.5
-  movingTurnSpeed: 360
-  stationaryTurnSpeed: 180
+  moveSpeedMultiplier: 1
+  animationSpeedMultiplier: 1
+  movingTurnSpeed: 750
+  stationaryTurnSpeed: 750
   moveThreshold: 1
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1.5
