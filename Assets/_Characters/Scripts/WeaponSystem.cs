@@ -93,8 +93,8 @@ namespace RPG.Characters
             var mainHands = GetComponentsInChildren<MainHand>();
             int numberOfMainHands = mainHands.Length;
 
-            Assert.IsFalse(numberOfMainHands <= 0, "No MainHand found on player, please add one"); // handle 0 hand
-            Assert.IsFalse(numberOfMainHands > 1, "Multiple MainHand Scripts on Player, please remove the extra ones"); //handle 1 hand
+            Assert.IsFalse(numberOfMainHands <= 0, "No MainHand found on " + gameObject.name + ", please add one"); // handle 0 hand
+            Assert.IsFalse(numberOfMainHands > 1, "Multiple MainHand Scripts on " + gameObject.name + ", please remove the extra ones"); //handle 1 hand
 
             return mainHands[0].gameObject;
 
@@ -121,8 +121,11 @@ namespace RPG.Characters
             while (attackerStillAlive && targetStillAlive)  // while still alive
             {
                 // know how often to attack
-                float weaponHitPeriod = CurrentWeaponConfig.GetMinTimeBetweenHits();
-                float timeToWait = weaponHitPeriod * character.GetAnimSpeedMultiplier();
+
+                var animationClip = CurrentWeaponConfig.GetAttackAnimClip();
+                float animationClipTime = animationClip.length / character.GetAnimSpeedMultiplier();
+                float timeToWait = animationClipTime + CurrentWeaponConfig.GetTimeBetweenanimationCycles();
+
                 // if time to hit again
                 bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
                 if (isTimeToHitAgain)
@@ -156,17 +159,7 @@ namespace RPG.Characters
             return CurrentWeaponConfig;
         }
 
-        private void AttackTarget()
-        {
-            if (Time.time - lastHitTime > CurrentWeaponConfig.GetMinTimeBetweenHits())
-            {
-                SetAttackAnimation();
-                animator.SetTrigger(ATTACK_TRIGGER);
-                lastHitTime = Time.time;
-            }
-        }
-
-        private float CalculateDamage()
+        float CalculateDamage()
         {
             // stuff about "Critical hit" removed on RPG 159 Slowly Extracting WeaponSystem
 
