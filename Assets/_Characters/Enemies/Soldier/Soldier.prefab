@@ -2382,6 +2382,7 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: 5d96cfe95a252b3459d1de3d5ae70bd6,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: 1c770b5eee1cf5d4ea185cf8cb701bcb, type: 3}
+  animatorForwardCap: 1
   audioSourceSpatialBlend: 0.5
   colliderCenter: {x: 0.05, y: 0.8, z: 0}
   colliderRadius: 0.25
@@ -2427,12 +2428,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695384290837512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48637e014b3218f49a9eff667752c12c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6366b16153b96a244a6c9944c9af2f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
   healthBar: {fileID: 114086238156478106}
   damageSounds:
+  - {fileID: 8300000, guid: 599f0c12f665d1e459f0c951ac05a9a4, type: 3}
+  - {fileID: 8300000, guid: ef0ebeccb535fb341b950200f6f249ef, type: 3}
   - {fileID: 8300000, guid: 2221f93f677ea074baa6bca97f62b2b1, type: 3}
   deathSounds:
   - {fileID: 8300000, guid: d9b6350ee08128c48b5724e5c9c3bae4, type: 3}
