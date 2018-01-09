@@ -76,19 +76,19 @@ namespace RPG.Characters
             // trigger deather animation
             animator.SetTrigger(DEATH_TRIGGER);
 
+            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+            audioSource.Play();  // not oneshot here because we want to override any existing death sounds
+                                 // wait and load the scene
+            yield return new WaitForSecondsRealtime(audioSource.clip.length);
+
             var playerComponent = GetComponent<PlayerControl>();
             if (playerComponent && playerComponent.isActiveAndEnabled) // relying on lazy evaluation
             {
-                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-                audioSource.Play();  // not oneshot here because we want to override any existing death sounds
-                // wait and load the scene
-                yield return new WaitForSecondsRealtime(audioSource.clip.length);
+
                 SceneManager.LoadScene(1); // reload scene (or go to death screen) - (Use SceneManager) 
             }
             else // assume is enemy for now, reconsider on other NPCs
             {
-                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-                audioSource.Play();
                 DestroyObject(gameObject, deathVanishSeconds);
             }
 
