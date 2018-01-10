@@ -50,7 +50,7 @@ namespace RPG.Characters
         {
             var energyComponent = GetComponent<SpecialAbilities>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();  // reads from scripttible object
-            float playerHealth = GetComponent<HealthSystem>().currentHealthPoints; // added by andy
+            float playerHealth = GetComponent<HealthSystem>().healthAsPercentage; // added by andy
 
             if (energyCost <= currentEnergyPoints && playerHealth > 0) // 2nd part added by andy
             {

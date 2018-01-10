@@ -5,7 +5,6 @@ using UnityEngine.Assertions;
 namespace RPG.Characters
 
 {
-    [RequireComponent(typeof(HealthSystem))]
     public class WeaponSystem : MonoBehaviour
     {
         [SerializeField] float baseDamage = 11f;
