@@ -80,6 +80,11 @@ namespace RPG.Characters
 
         void Update()
         {
+            if (!navMeshAgent.isOnNavMesh)
+            {
+                Debug.LogError(gameObject.name + " uh oh this guy is not on the navmesh");
+            }
+
             if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
             {
                 Move(navMeshAgent.desiredVelocity);
