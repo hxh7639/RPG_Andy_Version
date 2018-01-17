@@ -2428,7 +2428,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1695384290837512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6366b16153b96a244a6c9944c9af2f5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 48637e014b3218f49a9eff667752c12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthPoints: 100
@@ -2443,7 +2443,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5b29baa3b28802845b1ee1e749f01e7a, type: 3}
   - {fileID: 8300000, guid: 2db374b0125381a419e1274e2f3a827c, type: 3}
   deathVanishSeconds: 2
-  currentHealthPoints: 0
 --- !u!137 &137338797791670150
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
