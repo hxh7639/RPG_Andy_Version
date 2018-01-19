@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Random Andy Stuff/OSWL_LOGO/OSWL Logo.unity
     guid: 6c464b90dd747044993a76d59c622e25
   - enabled: 1
+    path: Assets/_Levels/Start_Menu/Start_Menu.unity
+    guid: 30ff67c36607b3e47a1b1e28b19d908c
+  - enabled: 1
     path: Assets/_Levels/Andy's Village.unity
     guid: 84fa7e77223b5b64996916f85b7ea496
   - enabled: 0
