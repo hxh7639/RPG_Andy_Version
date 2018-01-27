@@ -15,7 +15,7 @@ namespace RPG.Characters
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
         [SerializeField] float deathVanishSeconds = 2.0f;
-        // TODO maybe a parameter for character vanishing
+                // TODO maybe a parameter for character vanishing
         const string DEATH_TRIGGER = "Death";
         float currentHealthPoints;
         Animator animator;

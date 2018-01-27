@@ -740,7 +740,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1745836967167836}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 99.62, y: 8.66, z: -83.356995}
+  m_LocalPosition: {x: 97.71, y: 8.566, z: -82.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4265803684184154}
@@ -1465,6 +1465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1946e1c1bae1c34ba2666ebb3463952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraXMultiplier: 2
+  cameraYMultiplier: 10
+  cameraZMultiplier: 2
 --- !u!114 &114486606967821188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1537,6 +1540,7 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: 5d96cfe95a252b3459d1de3d5ae70bd6,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: e1345f231bddd7a488397fb5ca71c0cb, type: 3}
+  animatorForwardCap: 1
   audioSourceSpatialBlend: 0.5
   colliderCenter: {x: 0, y: 0.8, z: 0}
   colliderRadius: 0.3
@@ -1589,7 +1593,6 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: e02c521ef5f7ffe4c9ca668e4701816b, type: 3}
   deathVanishSeconds: 2
-  currentHealthPoints: 0
 --- !u!114 &114836989159778046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1807,5 +1810,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -2.7}
-  m_SizeDelta: {x: 20, y: 2}
+  m_SizeDelta: {x: 25, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
