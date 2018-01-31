@@ -84,6 +84,11 @@ namespace RPG.Characters
                 StartCoroutine(MoveAndPowerAttack(enemy));
             }
         }
+
+        Vector3 UpdateTargetPosition()
+        {
+            
+        }
         
         IEnumerator MoveToTarget(GameObject target)
         {
