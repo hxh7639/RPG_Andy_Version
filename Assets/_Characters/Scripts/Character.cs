@@ -91,6 +91,7 @@ namespace RPG.Characters
             }
             else
             {
+                print(gameObject.name + " Move Vector set to zero!!");
                 Move(Vector3.zero);
             }
         }

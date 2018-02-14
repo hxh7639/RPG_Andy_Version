@@ -85,10 +85,6 @@ namespace RPG.Characters
             }
         }
 
-        Vector3 UpdateTargetPosition()
-        {
-            
-        }
         
         IEnumerator MoveToTarget(GameObject target)
         {
